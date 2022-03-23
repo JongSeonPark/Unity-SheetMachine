@@ -1,0 +1,14 @@
+using UnityEngine;
+using System.Collections;
+using FGB.RTS;
+using FGB.RTS.Simulation.Skill;
+
+///
+/// !!! Machine generated code !!!
+/// !!! DO NOT CHANGE Tabs to Spaces !!!
+/// 
+[System.Serializable]
+public class $ClassName : ISkillTableDatabase
+{
+	$MemberFields
+}
