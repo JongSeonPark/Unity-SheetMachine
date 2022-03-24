@@ -16,27 +16,27 @@ using ChickenGames.SheetMachine.Utils;
 namespace ChickenGames.SheetMachine.GoogleSheet
 {
     [CreateAssetMenu(menuName = "SheetMachine/Setting/GoogleData Setting")]
-    public class GoogleDataSettings : ScriptableObject
+    public class GoogleDataSettings : SingletonScriptableObject<GoogleDataSettings>
     {
         [SerializeField]
         string[] scopes = { SheetsService.Scope.SpreadsheetsReadonly };
 
-        
+
         /// <summary>
         /// Google Cloud Platform에서의 프로젝트(어플리케이션)이름을 입력하세요.
         /// </summary>
-        public string applicationName = "My First Project";
+        public string applicationName = "AppName";
         /// <summary>
         /// Credentials를 다운받으셔서 json 파일의 경로를 넣어주세요.
         /// </summary>
-        public string credentialsPath = "";
+        public string credentialsPath = string.Empty;
 
-        public string tokenPath = "";
+        public string tokenPath = string.Empty;
 
         /// <summary>
         /// A default path where .txt template files are.
         /// </summary>
-        public string templatePath = "Asset Packs/QuickSheet/GooglePlugin/Templates";
+        public string templatePath = string.Empty;
 
         /// <summary>
         /// A path where generated ScriptableObject derived class and its data class script files are to be put.
@@ -64,9 +64,8 @@ namespace ChickenGames.SheetMachine.GoogleSheet
             get
             {
                 if (sheetsService == null)
-                {
                     InitAuthenticate();
-                }
+
                 return sheetsService;
             }
         }
@@ -88,11 +87,12 @@ namespace ChickenGames.SheetMachine.GoogleSheet
             UserCredential credential;
             //you have to put the file to this path. The credentials.json you can download from the Google Cloud console.
             using (var stream =
-               new FileStream(credentialsPath, FileMode.Open, FileAccess.Read))
+               new FileStream(Path.Combine(Application.dataPath, credentialsPath), FileMode.Open, FileAccess.Read))
             {
                 // The file token.json stores the user's access and refresh tokens, and is created
                 // automatically when the authorization flow completes for the first time.
-                string credPath = Application.dataPath + "/Tokens/token.json";
+                var credientialFileName = Path.GetFileNameWithoutExtension(credentialsPath);
+                string credPath = Path.Combine(Application.dataPath, tokenPath, credientialFileName + "_token.json");
                 credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
                     GoogleClientSecrets.FromStream(stream).Secrets,
                     scopes,
