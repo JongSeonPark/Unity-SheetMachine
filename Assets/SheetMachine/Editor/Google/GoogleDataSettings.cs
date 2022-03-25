@@ -41,20 +41,20 @@ namespace ChickenGames.SheetMachine.GoogleSheet
         /// <summary>
         /// A path where generated ScriptableObject derived class and its data class script files are to be put.
         /// </summary>
-        public string runtimePath = string.Empty;
+        public string runtimeClassPath = string.Empty;
 
         /// <summary>
         /// A path where generated editor script files are to be put.
         /// </summary>
-        public string editorPath = string.Empty;
+        public string editorClassPath = string.Empty;
 
         private void Awake()
         {
             credentialsPath = PathMethods.GetDefaultCredientalPath();
             tokenPath = PathMethods.GetDefaultTokenPath();
             templatePath = PathMethods.GetDefaultTemplatePath();
-            runtimePath = PathMethods.GetDefaultRuntimePath();
-            editorPath = PathMethods.GetDefaultEditorPath();
+            runtimeClassPath = PathMethods.GetDefaultRuntimeClassPath();
+            editorClassPath = PathMethods.GetDefaultEditorClassPath();
         }
 
         SheetsService sheetsService;
@@ -87,12 +87,12 @@ namespace ChickenGames.SheetMachine.GoogleSheet
             UserCredential credential;
             //you have to put the file to this path. The credentials.json you can download from the Google Cloud console.
             using (var stream =
-               new FileStream(Path.Combine(Application.dataPath, credentialsPath), FileMode.Open, FileAccess.Read))
+               new FileStream(PathMethods.Combine(Application.dataPath, credentialsPath), FileMode.Open, FileAccess.Read))
             {
                 // The file token.json stores the user's access and refresh tokens, and is created
                 // automatically when the authorization flow completes for the first time.
                 var credientialFileName = Path.GetFileNameWithoutExtension(credentialsPath);
-                string credPath = Path.Combine(Application.dataPath, tokenPath, credientialFileName + "_token.json");
+                string credPath = PathMethods.Combine(Application.dataPath, tokenPath, credientialFileName + "_token.json");
                 credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
                     GoogleClientSecrets.FromStream(stream).Secrets,
                     scopes,

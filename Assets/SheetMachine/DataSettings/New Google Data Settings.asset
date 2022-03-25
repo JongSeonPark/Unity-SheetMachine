@@ -19,5 +19,5 @@ MonoBehaviour:
     (1).json
   tokenPath: SheetMachine\GoogleTokens
   templatePath: SheetMachine\Templates
-  runtimePath: SheetMachine\CreatedScrpits\Runtime
-  editorPath: SheetMachine\CreatedScrpits\Editor
+  runtimeClassPath: SheetMachine/CreatedScrpits/Runtime
+  editorClassPath: SheetMachine/CreatedScrpits/Editor
