@@ -92,15 +92,12 @@ namespace ChickenGames.SheetMachine.GoogleSheet
 
             if (string.IsNullOrEmpty(machine.dataClassName)) machine.dataClassName = machine.sheetName;
 
-
-
             EditorUtility.SetDirty(machine);
             AssetDatabase.SaveAssets();
         }
 
         protected override void Generate()
         {
-            machine.templatePath
             using (var writer = new StreamWriter("Path"))
             {
                 writer.Write("value");

@@ -30,6 +30,8 @@ MonoBehaviour:
     isArray: 1
     type: 1
   templatePath: SheetMachine/Templates
+  dataClassTemplatePath: 
+  scriptableObjectClassPath: 
   runtimeClassPath: SheetMachine/CreatedScrpits/Editor
   editorClassPath: SheetMachine/CreatedScrpits/Editor
   dataClassName: TextKey

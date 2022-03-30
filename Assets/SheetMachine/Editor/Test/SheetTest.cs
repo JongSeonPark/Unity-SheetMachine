@@ -10,7 +10,7 @@ using System;
 using UnityEngine.EventSystems;
 using ChickenGames.SheetMachine.Utils;
 
-[CreateAssetMenu(menuName = "AAAAAAAAAAAAAAAAA")]
+[CreateAssetMenu(menuName = "EXCEL SHEET TEST")]
 public class SheetTest : ScriptableObject
 {
     string sheetPath = "";
