@@ -1,0 +1,31 @@
+using UnityEngine;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+
+///
+/// !!! Machine generated code !!!
+///
+/// A class which deriveds ScritableObject class so all its data 
+/// can be serialized onto an asset data file.
+/// 
+[System.Serializable]
+public class $className : ScriptableObject 
+{
+    [HideInInspector] [SerializeField] 
+    public string SheetName = "";
+    
+    [HideInInspector] [SerializeField] 
+    public string WorksheetName = "";
+    
+    // Note: initialize in OnEnable() not here.
+    public $dataClassName[] dataArray;
+
+    public const int dataRowStartIndex = $dataRowStartIndex;    
+
+    void OnEnable()
+    {
+        if (dataArray == null)
+            dataArray = new $dataClassName[0];
+    }
+}

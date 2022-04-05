@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,12 +16,38 @@ using ChickenGames.SheetMachine.Utils;
 
 namespace ChickenGames.SheetMachine.GoogleSheet
 {
+    enum SheetsServiceScope
+    {
+        Drive,
+        DriveFile,
+        DriveReadonly,
+        Spreadsheets,
+        SpreadsheetsReadonly
+    }
+
     [CreateAssetMenu(menuName = "SheetMachine/Setting/GoogleData Setting")]
     public class GoogleDataSettings : SingletonScriptableObject<GoogleDataSettings>
     {
         [SerializeField]
-        string[] scopes = { SheetsService.Scope.SpreadsheetsReadonly };
+        SheetsServiceScope[] scopes = { SheetsServiceScope.SpreadsheetsReadonly };
 
+        string[] GetScopes()
+        {
+            string ScopeEnumToString(SheetsServiceScope scope)
+            {
+                switch (scope)
+                {
+                    case SheetsServiceScope.Drive: return SheetsService.Scope.Drive;
+                    case SheetsServiceScope.DriveFile: return SheetsService.Scope.DriveFile;
+                    case SheetsServiceScope.DriveReadonly: return SheetsService.Scope.DriveReadonly;
+                    case SheetsServiceScope.Spreadsheets: return SheetsService.Scope.Spreadsheets;
+                    case SheetsServiceScope.SpreadsheetsReadonly: return SheetsService.Scope.SpreadsheetsReadonly;
+                    default: return SheetsService.Scope.SpreadsheetsReadonly;
+                }
+            }
+
+            return scopes.Select(ScopeEnumToString).ToArray();
+        }
 
         /// <summary>
         /// Google Cloud Platform에서의 프로젝트(어플리케이션)이름을 입력하세요.
@@ -95,7 +122,7 @@ namespace ChickenGames.SheetMachine.GoogleSheet
                 string credPath = PathMethods.Combine(Application.dataPath, tokenPath, credientialFileName + "_token.json");
                 credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
                     GoogleClientSecrets.FromStream(stream).Secrets,
-                    scopes,
+                    GetScopes(),
                     "user",
                     CancellationToken.None,
                     new FileDataStore(credPath, true)).Result;

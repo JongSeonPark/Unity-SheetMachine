@@ -8,7 +8,7 @@ namespace ChickenGames.SheetMachine
     public enum CellType
     {
         // Undefined is not extract.
-        Undefined, 
+        Undefined,
         String,
         Short,
         Int,
@@ -41,6 +41,38 @@ namespace ChickenGames.SheetMachine
             type = CellType.Undefined;
             if (typeStr != null)
                 Enum.TryParse(typeStr, true, out type);
+        }
+    }
+
+    public class MemberFieldData
+    {
+        public CellType type = CellType.Undefined;
+        public string Type => TypeEnumToString(type);
+        public string name;
+
+        public static string TypeEnumToString(CellType cellType)
+        {
+            switch (cellType)
+            {
+                case CellType.String:
+                    return "string";
+                case CellType.Short:
+                    return "short";
+                case CellType.Int:
+                    return "int";
+                case CellType.Long:
+                    return "long";
+                case CellType.Float:
+                    return "float";
+                case CellType.Double:
+                    return "double";
+                case CellType.Enum:
+                    return "enum";
+                case CellType.Bool:
+                    return "bool";
+                default:
+                    return "string";
+            }
         }
     }
 

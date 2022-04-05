@@ -19,15 +19,15 @@ public class GoogleSheetTest : ScriptableObject
         get => GoogleDataSettings.Instance.Service;
     }
 
-    private void Awake()
-    {
-        Init();
-        GetRange();
-        CreateSheet();
-        JustGetRanges();
-        ActDataFilter();
-        MetaGet();
-    }
+    //private void Awake()
+    //{
+    //    Init();
+    //    GetRange();
+    //    CreateSheet();
+    //    JustGetRanges();
+    //    ActDataFilter();
+    //    MetaGet();
+    //}
 
     public Spreadsheet GetSheet(string spreadsheetId)
     {

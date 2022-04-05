@@ -98,11 +98,18 @@ namespace ChickenGames.SheetMachine.GoogleSheet
 
         protected override void Generate()
         {
-            using (var writer = new StreamWriter("Path"))
-            {
-                writer.Write("value");
-                writer.Close();
-            }
+            ScriptsGenerator.Generate(PathMethods.Combine(Application.dataPath, machine.templatePath, "ScriptableObjectClass.txt"),
+                new ScriptPrescription
+                {
+                    className = "classNama",
+                    dataClassName = "dataClassName",
+                    spreadsheetName = "spreadsheetName",
+                });
+            //using (var writer = new StreamWriter("Path"))
+            //{
+            //    writer.Write("value");
+            //    writer.Close();
+            //}
         }
     }
 }

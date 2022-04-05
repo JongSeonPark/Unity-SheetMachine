@@ -1,0 +1,20 @@
+using UnityEngine;
+using UnityEditor;
+using System.IO;
+using UnityQuickSheet;
+
+///
+/// !!! Machine generated code !!!
+/// 
+public partial class GoogleDataAssetUtility
+{
+    [MenuItem("Assets/Create/Google/$WorkSheetClassName")]
+    public static void Create$ClassName()
+    {
+        $WorkSheetClassName asset = CustomAssetUtility.CreateAsset<$WorkSheetClassName>();
+        asset.SheetName = "$SpreadSheetName";
+        asset.WorksheetName = "$ClassName";
+        EditorUtility.SetDirty(asset);        
+    }
+    
+}

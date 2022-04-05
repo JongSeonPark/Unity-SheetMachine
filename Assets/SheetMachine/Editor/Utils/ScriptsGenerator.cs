@@ -9,21 +9,30 @@ namespace ChickenGames.SheetMachine.Utils
 {
     public class ScriptsGenerator
     {
-        public Dictionary<string, string> replaceTexts;
+        //public Dictionary<string, string> replaceTexts;
 
-        public string Generate(string targetFilePath)
+        public static string Generate(string targetFilePath, ScriptPrescription sp)
         {
             if (!File.Exists(targetFilePath))
                 throw new ArgumentNullException("paths");
 
-            string result = File.ReadAllText(targetFilePath);
+            string template = File.ReadAllText(targetFilePath);
 
-            foreach(var keyValue in replaceTexts)
+            var type = sp.GetType();
+
+            
+            foreach (var f in type.GetFields())
             {
-                result = result.Replace(keyValue.Key, keyValue.Value);
+                template = template.Replace($"${f.Name}", f.GetValue(sp).ToString());
             }
 
-            return result;
+
+            //foreach(var keyValue in replaceTexts)
+            //{
+            //    result = result.Replace(keyValue.Key, keyValue.Value);
+            //}
+
+            return template;
         }
     }
 }
