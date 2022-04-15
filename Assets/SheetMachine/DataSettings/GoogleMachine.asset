@@ -29,7 +29,7 @@ MonoBehaviour:
   - name: Test3
     isArray: 0
     type: 0
-  templatePath: SheetMachine/Templates/NewNew
+  templatePath: SheetMachine/Templates
   dataClassTemplatePath: 
   scriptableObjectClassPath: 
   runtimeClassPath: SheetMachine/CreatedScrpits/Runtime

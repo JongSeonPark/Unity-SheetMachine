@@ -75,8 +75,9 @@ namespace ChickenGames.SheetMachine.GoogleSheet
         /// </summary>
         public string editorClassPath = string.Empty;
 
-        private void Awake()
+        public GoogleDataSettings()
         {
+            Debug.Log("Awake");
             credentialsPath = PathMethods.GetDefaultCredientalPath();
             tokenPath = PathMethods.GetDefaultTokenPath();
             templatePath = PathMethods.GetDefaultTemplatePath();
