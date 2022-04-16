@@ -11,19 +11,20 @@ namespace ChickenGames.SheetMachine.Utils
     {
         //public Dictionary<string, string> replaceTexts;
 
-        public static string Generate(string targetFilePath, ScriptPrescription sp)
+        public static void Generate(string txtFilePath, string createPath, ScriptPrescription sp)
         {
-            if (!File.Exists(targetFilePath))
+            if (!File.Exists(txtFilePath))
                 throw new ArgumentNullException("paths");
 
-            string template = File.ReadAllText(targetFilePath);
+            string template = File.ReadAllText(txtFilePath);
 
             var type = sp.GetType();
 
-            
             foreach (var f in type.GetFields())
             {
-                template = template.Replace($"${f.Name}", f.GetValue(sp).ToString());
+                var name = f.Name;
+                var v = f.GetValue(sp).ToString();
+                template = template.Replace($"${f.Name}", v);
             }
 
 
@@ -32,7 +33,18 @@ namespace ChickenGames.SheetMachine.Utils
             //    result = result.Replace(keyValue.Key, keyValue.Value);
             //}
 
-            return template;
+            CreateCSFile(createPath, template);
+        }
+
+
+
+        static void CreateCSFile(string path, string content)
+        {
+            using (var writer = new StreamWriter(path))
+            {
+                writer.Write(content);
+                writer.Close();
+            }
         }
     }
 }
