@@ -56,34 +56,24 @@ namespace ChickenGames.SheetMachine.GoogleSheet
         /// <summary>
         /// Credentials를 다운받으셔서 json 파일의 경로를 넣어주세요.
         /// </summary>
-        public string credentialsPath = string.Empty;
+        public string credentialsPath = PathMethods.GetDefaultCredientalPath();
 
-        public string tokenPath = string.Empty;
+        public string tokenPath = PathMethods.GetDefaultTokenPath();
 
         /// <summary>
         /// A default path where .txt template files are.
         /// </summary>
-        public string templatePath = string.Empty;
+        public string templatePath = PathMethods.GetDefaultTemplatePath();
 
         /// <summary>
         /// A path where generated ScriptableObject derived class and its data class script files are to be put.
         /// </summary>
-        public string runtimeClassPath = string.Empty;
+        public string runtimeClassPath = PathMethods.GetDefaultRuntimeClassPath();
 
         /// <summary>
         /// A path where generated editor script files are to be put.
         /// </summary>
-        public string editorClassPath = string.Empty;
-
-        public GoogleDataSettings()
-        {
-            Debug.Log("Awake");
-            credentialsPath = PathMethods.GetDefaultCredientalPath();
-            tokenPath = PathMethods.GetDefaultTokenPath();
-            templatePath = PathMethods.GetDefaultTemplatePath();
-            runtimeClassPath = PathMethods.GetDefaultRuntimeClassPath();
-            editorClassPath = PathMethods.GetDefaultEditorClassPath();
-        }
+        public string editorClassPath = PathMethods.GetDefaultEditorClassPath();
 
         SheetsService sheetsService;
 

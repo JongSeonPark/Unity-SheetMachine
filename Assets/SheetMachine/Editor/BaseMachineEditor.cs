@@ -1,3 +1,4 @@
+using ChickenGames.SheetMachine.GoogleSheet;
 using ChickenGames.SheetMachine.Utils;
 using System.Collections;
 using System.Collections.Generic;
@@ -32,7 +33,11 @@ namespace ChickenGames.SheetMachine
 
             bool hasColum = machine.columnHeaderList != null && machine.columnHeaderList.Count != 0;
             if (GUILayout.Button(hasColum ? "Import" : "Reimport"))
-                Import();
+            {
+                machine.Import();
+                EditorUtility.SetDirty(machine);
+                AssetDatabase.SaveAssets();
+            }
 
             if (hasColum)
                 DrawSheetHeaders();
@@ -62,13 +67,22 @@ namespace ChickenGames.SheetMachine
                 labelWidth: labelWidth,
                 filePanelTitle: "Open folder"
                 );
-            GUIHelper.DrawTextField(ref machine.dataClassName, "DataClass name: ", labelWidth);
+            GUIHelper.DrawTextField(ref machine.className, "DataClass name: ", labelWidth);
 
 
             EditorGUILayout.Separator();
 
             if (GUILayout.Button("Generate"))
-                Generate();
+            {
+                machine.Generate();
+                AssetDatabase.Refresh();
+            }
+
+            if (GUI.changed)
+            {
+                EditorUtility.SetDirty(GoogleDataSettings.Instance);
+                EditorUtility.SetDirty(machine);
+            }
         }
 
         protected void DrawSheetHeaders()
@@ -114,7 +128,7 @@ namespace ChickenGames.SheetMachine
         }
 
 
-        protected abstract void Import();
-        protected abstract void Generate();
+        //protected abstract void Import();
+        //protected abstract void Generate();
     }
 }

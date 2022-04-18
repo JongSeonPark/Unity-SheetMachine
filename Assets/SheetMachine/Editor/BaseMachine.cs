@@ -19,7 +19,7 @@ namespace ChickenGames.SheetMachine
         Bool,
     }
 
-    [System.Serializable]
+    [Serializable]
     public class ColumnHeader
     {
         public string name;
@@ -76,24 +76,56 @@ namespace ChickenGames.SheetMachine
         }
     }
 
-    public class BaseMachine : ScriptableObject
+    [Serializable]
+    public class ColumnHeaderList : List<ColumnHeader>
+    {
+        public override string ToString()
+        {
+            string result = "\n";
+            ForEach(header =>
+            {
+                string type = header.type.ToString().ToLower();
+
+                // Field는 소문자 시작, property는 대문자 시작
+                //var h = ((char)header.name[0]).ToString();
+                //var r = header.name.Substring(1);
+                //string name = h.ToLower() + r;
+                //string propertyName = h.ToUpper() + r;
+
+                // Property 제외
+                string name = header.name;
+                string arr = header.isArray ? "[]" : "";
+                result +=
+                $"    [SerializeField]\n" +
+                $"    public {type}{arr} {name};\n" +
+                $"\n";
+                //$"    private {type}{arr} {name};\n" + 
+                //$"    public {type}{arr} {propertyName} {{ get => {name}; set => {name}; }};\n";
+            });
+            return result;
+        }
+    }
+
+    public abstract class BaseMachine : ScriptableObject
     {
         /// <summary>
         /// SpreadSheetName is SpreadSheetId in Google
         /// </summary>
         public string spreadSheetName;
         public string sheetName;
-        public int dataStartRowIndex;
         public bool includeTypeRow;
         public int typeRowIndex;
         public bool includeIsArrayRow;
         public int arrayRowIndex;
-        public List<ColumnHeader> columnHeaderList;
+        public ColumnHeaderList columnHeaderList;
         public string templatePath;
         public string dataClassTemplatePath;
         public string scriptableObjectClassPath;
         public string runtimeClassPath;
         public string editorClassPath;
-        public string dataClassName;
+        public string className;
+
+        public abstract void Import();
+        public abstract void Generate();
     }
 }

@@ -9,8 +9,9 @@ namespace ChickenGames.SheetMachine.Utils
 {
     public class ScriptPrescription
     {
-        public string className;
-        public string spreadsheetName;
-        public string dataClassName;
+        public string ClassName;
+        public string SpreadsheetName;
+        public string DataClassName;
+        public string DataRowStartIndex;
     }
 }

@@ -10,7 +10,7 @@ using System.Collections.Generic;
 /// can be serialized onto an asset data file.
 /// 
 [System.Serializable]
-public class $ClassName : ScriptableObject 
+public class SheetTest : ScriptableObject 
 {
     [HideInInspector] [SerializeField] 
     public string SheetName = "";
@@ -19,13 +19,13 @@ public class $ClassName : ScriptableObject
     public string WorksheetName = "";
     
     // Note: initialize in OnEnable() not here.
-    public $DataClassName[] dataArray;
+    public SheetTestData[] dataArray;
 
-    public const int typeRowIndex = $TypeRowIndex;    
+    public const int typeRowIndex = 1;    
 
     void OnEnable()
     {
         if (dataArray == null)
-            dataArray = new $DataClassName[0];
+            dataArray = new SheetTestData[0];
     }
 }

@@ -12,26 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11a0819541ba41a4e8af2bac41f913cc, type: 3}
   m_Name: GoogleMachine
   m_EditorClassIdentifier: 
-  spreadSheetName: 1cqTcRk353iCukFWZATqzs_yexrb-5CC7w_fiipCQw7Y
+  spreadSheetName: 1BpKOeJMIIls1ThQ1rklhqycpxqHvTs8I2ozCHqzMC9o
   sheetName: SheetTest
-  dataStartRowIndex: 0
   includeTypeRow: 1
   typeRowIndex: 1
   includeIsArrayRow: 0
   arrayRowIndex: 2
-  columnHeaderList:
-  - name: Test1
-    isArray: 0
-    type: 3
-  - name: Test2
-    isArray: 0
-    type: 1
-  - name: Test3
-    isArray: 0
-    type: 0
   templatePath: SheetMachine/Templates/NewNew
   dataClassTemplatePath: 
   scriptableObjectClassPath: 
   runtimeClassPath: SheetMachine/CreatedScrpits/Runtime
   editorClassPath: SheetMachine/CreatedScrpits/Editor
-  dataClassName: TextKey
+  className: SheetTest

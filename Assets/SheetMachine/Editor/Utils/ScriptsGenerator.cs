@@ -36,6 +36,22 @@ namespace ChickenGames.SheetMachine.Utils
             CreateCSFile(createPath, template);
         }
 
+        public static void Generate(string txtFilePath, string createPath, Dictionary<string, string> sp)
+        {
+            if (!File.Exists(txtFilePath))
+                throw new ArgumentNullException("paths");
+
+            string template = File.ReadAllText(txtFilePath);
+
+            foreach (var keyValue in sp)
+            {
+                var key = keyValue.Key;
+                var value = keyValue.Value;
+                template = template.Replace($"${key}", value);
+            }
+
+            CreateCSFile(createPath, template);
+        }
 
 
         static void CreateCSFile(string path, string content)
