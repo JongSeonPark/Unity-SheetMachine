@@ -95,16 +95,16 @@ namespace ChickenGames.SheetMachine.GoogleSheet
                 { "TypeRowIndex", typeRowIndex.ToString() },
                 { "MemberFields", columnHeaderList.ToString() },
             };
-            
-            ScriptsGenerator.Generate(
-                PathMethods.Combine(Application.dataPath, templatePath, "ScriptableObjectClass.txt"),
-                PathMethods.Combine(Application.dataPath, runtimeClassPath, $"{scriptPrescription["ClassName"]}.cs"),
-                scriptPrescription);
 
             ScriptsGenerator.Generate(
-                PathMethods.Combine(Application.dataPath, templatePath, "DataClass.txt"),
-                PathMethods.Combine(Application.dataPath, runtimeClassPath, $"{scriptPrescription["DataClassName"]}.cs"),
-                scriptPrescription);
+                txtFilePath: PathMethods.Combine(Application.dataPath, templatePath, "ScriptableObjectClass.txt"),
+                createPath: PathMethods.Combine(Application.dataPath, runtimeClassPath, $"{scriptPrescription["ClassName"]}.cs"),
+                sp: scriptPrescription);
+
+            ScriptsGenerator.Generate(
+                txtFilePath: PathMethods.Combine(Application.dataPath, templatePath, "DataClass.txt"),
+                createPath: PathMethods.Combine(Application.dataPath, runtimeClassPath, $"{scriptPrescription["DataClassName"]}.cs"),
+                sp: scriptPrescription);
 
             //ScriptsGenerator.Generate(
             //    PathMethods.Combine(Application.dataPath, templatePath, "ScriptableObjectClass.txt"),

@@ -6,9 +6,9 @@ using System.Linq;
 
 namespace ChickenGames.SheetMachine.GoogleSheet
 {
-    public class GoogleDataSerializer
+    public static class GoogleDataSerializer
     {
-        static public T[] Deserialize<T>(IList<IList<object>> rows, int dataRowStartIndex)
+        public static T[] Deserialize<T>(IList<IList<object>> rows, int dataRowStartIndex)
         {
             Type t = typeof(T);
             List<T> r = new List<T>();

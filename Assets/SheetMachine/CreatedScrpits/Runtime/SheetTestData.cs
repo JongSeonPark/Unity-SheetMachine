@@ -9,14 +9,5 @@ using System.Collections;
 public class SheetTestData
 {
 	
-    [SerializeField]
-    public string AA;
-
-    [SerializeField]
-    public string C;
-
-    [SerializeField]
-    public string ESDA;
-
 
 }
