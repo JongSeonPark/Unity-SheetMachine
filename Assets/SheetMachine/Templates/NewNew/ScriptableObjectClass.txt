@@ -8,15 +8,15 @@ using System.Collections.Generic;
 public class $ClassName : ScriptableObject 
 {
     [HideInInspector] [SerializeField] 
-    public string SheetName = "";
+    public readonly string SpreadSheetName = "$SpreadsheetName";
     
     [HideInInspector] [SerializeField] 
-    public string WorksheetName = "";
+    public readonly string WorksheetName = "$WorksheetName";
     
     // Note: initialize in OnEnable() not here.
     public $DataClassName[] dataArray;
 
-    public const int typeRowIndex = $TypeRowIndex;    
+    public readonly int typeRowIndex = $DataStartRowIndex;    
 
     void OnEnable()
     {

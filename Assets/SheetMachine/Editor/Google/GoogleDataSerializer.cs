@@ -19,13 +19,14 @@ namespace ChickenGames.SheetMachine.GoogleSheet
             for (int i = 0; i < headerRow.Count; i++)
             {
                 var header = (string)headerRow[i];
-                var property = t.GetProperty(header, BindingFlags.IgnoreCase | BindingFlags.Instance | BindingFlags.Public);
-                if (property != null && property.CanRead)
+                
+                var field = t.GetField(header, BindingFlags.IgnoreCase | BindingFlags.Instance | BindingFlags.Public);
+                if (field != null)
                 {
                     headerRowInfo.Add(new HeaderRowInfo
                     {
                         index = i,
-                        property = property,
+                        field = field,
                     });
                 }
             }
@@ -39,7 +40,7 @@ namespace ChickenGames.SheetMachine.GoogleSheet
                 {
                     var headerInfo = headerRowInfo[i];
                     var cell = row.Count > headerInfo.index ? (string)row[headerInfo.index] : "";
-                    var type = headerInfo.property.PropertyType;
+                    var type = headerInfo.field.FieldType;
                     object value = new object();
 
                     if (type.IsArray)
@@ -93,7 +94,7 @@ namespace ChickenGames.SheetMachine.GoogleSheet
                             value = Convert.ChangeType(cell, type);
                         }
                     }
-                    headerInfo.property.SetValue(inst, value);
+                    headerInfo.field.SetValue(inst, value);
                 }
                 r.Add(inst);
             }
@@ -104,6 +105,7 @@ namespace ChickenGames.SheetMachine.GoogleSheet
         {
             public int index;
             public PropertyInfo property;
+            public FieldInfo field;
         }
     }
 }

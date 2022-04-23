@@ -11,7 +11,7 @@ using UnityEngine.EventSystems;
 using ChickenGames.SheetMachine.Utils;
 
 [CreateAssetMenu(menuName = "EXCEL SHEET TEST")]
-public class SheetTest : ScriptableObject
+public class ExcelSheetTest : ScriptableObject
 {
     string sheetPath = "";
     private IWorkbook workbook = null;

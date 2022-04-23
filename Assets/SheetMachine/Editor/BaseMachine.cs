@@ -96,7 +96,7 @@ namespace ChickenGames.SheetMachine
                 string name = header.name;
                 string arr = header.isArray ? "[]" : "";
                 result +=
-                $"    [SerializeField]\n" +
+                //$"    [SerializeField]\n" +
                 $"    public {type}{arr} {name};\n" +
                 $"\n";
                 //$"    private {type}{arr} {name};\n" + 

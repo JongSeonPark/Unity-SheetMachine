@@ -9,5 +9,11 @@ using System.Collections;
 public class SheetTestData
 {
 	
+    public string AA;
+
+    public string C;
+
+    public string ESDA;
+
 
 }
