@@ -76,13 +76,39 @@ namespace ChickenGames.SheetMachine
         }
     }
 
-    [Serializable]
-    public class ColumnHeaderList : List<ColumnHeader>
+    public abstract class BaseMachine : ScriptableObject
     {
-        public override string ToString()
+        /// <summary>
+        /// SpreadSheetName is SpreadSheetId in Google
+        /// </summary>
+        public string spreadSheetName;
+        public string sheetName;
+        public bool includeTypeRow;
+        public int typeRowIndex;
+        public bool includeIsArrayRow;
+        public int arrayRowIndex;
+        //public ColumnHeaderList columnHeaderList;
+        public List<ColumnHeader> columnHeaderList;
+        public string templatePath;
+        public string dataClassTemplatePath;
+        public string scriptableObjectClassPath;
+        public string runtimeClassPath;
+        public string editorClassPath;
+        public string className;
+
+        public abstract void Import();
+        public abstract void Generate();
+
+        [Serializable]
+        public class ColumnHeaderList : List<ColumnHeader>
+        {
+            
+        }
+
+        public string CreateMemberFieldsString()
         {
             string result = "\n";
-            ForEach(header =>
+            columnHeaderList.ForEach(header =>
             {
                 string type = header.type.ToString().ToLower();
 
@@ -104,28 +130,5 @@ namespace ChickenGames.SheetMachine
             });
             return result;
         }
-    }
-
-    public abstract class BaseMachine : ScriptableObject
-    {
-        /// <summary>
-        /// SpreadSheetName is SpreadSheetId in Google
-        /// </summary>
-        public string spreadSheetName;
-        public string sheetName;
-        public bool includeTypeRow;
-        public int typeRowIndex;
-        public bool includeIsArrayRow;
-        public int arrayRowIndex;
-        public ColumnHeaderList columnHeaderList;
-        public string templatePath;
-        public string dataClassTemplatePath;
-        public string scriptableObjectClassPath;
-        public string runtimeClassPath;
-        public string editorClassPath;
-        public string className;
-
-        public abstract void Import();
-        public abstract void Generate();
     }
 }

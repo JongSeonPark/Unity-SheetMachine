@@ -2,21 +2,30 @@ using ChickenGames.SheetMachine.Utils;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace ChickenGames.SheetMachine.GoogleSheet
 {
-    [CreateAssetMenu(fileName = "GoogleMachine ", menuName = "SheetMachine/GoogleMachine", order = 0)]
     public class GoogleMachine : BaseMachine
     {
-        private void Awake()
+        [MenuItem("Assets/Create/SheetMachine/GoogleMachine")]
+        public static void Create()
         {
-            Debug.Log("Awake");
+            GoogleMachine asset = CreateInstance<GoogleMachine>();
 
-            templatePath = GoogleDataSettings.Instance.templatePath;
-            editorClassPath = GoogleDataSettings.Instance.editorClassPath;
-            runtimeClassPath = GoogleDataSettings.Instance.runtimeClassPath;
+            asset.templatePath = GoogleDataSettings.Instance.templatePath;
+            asset.editorClassPath = GoogleDataSettings.Instance.editorClassPath;
+            asset.runtimeClassPath = GoogleDataSettings.Instance.runtimeClassPath;
+
+            var path = PathMethods.Combine(AssetDatabase.GetAssetPath(Selection.activeObject), "GoogleMachine.asset");
+            AssetDatabase.CreateAsset(asset, AssetDatabase.GenerateUniqueAssetPath(path));
+            AssetDatabase.SaveAssets();
+            EditorUtility.SetDirty(asset);
+            EditorUtility.FocusProjectWindow();
+            Selection.activeObject = asset;
         }
+
 
         public override void Import()
         {
@@ -44,7 +53,7 @@ namespace ChickenGames.SheetMachine.GoogleSheet
             batchGetReq.Ranges = sheetRanges;
             var batchGetRes = batchGetReq.Execute();
 
-            ColumnHeaderList tmpColumnList = new ColumnHeaderList();
+            List<ColumnHeader> tmpColumnList = new List<ColumnHeader>();
 
             var headerRow = batchGetRes.ValueRanges[0].Values[0];
             for (int i = 0; i < headerRow.Count; i++)
@@ -101,7 +110,7 @@ namespace ChickenGames.SheetMachine.GoogleSheet
                 { "SpreadsheetName", spreadSheetName },
                 { "WorksheetName", sheetName },
                 { "DataStartRowIndex", dataStartRowIndex.ToString() },
-                { "MemberFields", columnHeaderList.ToString() },
+                { "MemberFields", CreateMemberFieldsString() },
             };
 
             ScriptsGenerator.Generate(

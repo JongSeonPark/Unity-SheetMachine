@@ -31,16 +31,15 @@ namespace ChickenGames.SheetMachine
                     machine.arrayRowIndex = EditorGUILayout.IntField("isArray Row: ", machine.arrayRowIndex);
             }
 
-            bool hasColum = machine.columnHeaderList != null && machine.columnHeaderList.Count != 0;
-            if (GUILayout.Button(hasColum ? "Import" : "Reimport"))
+            if (GUILayout.Button("Import"))
             {
                 machine.Import();
                 EditorUtility.SetDirty(machine);
                 AssetDatabase.SaveAssets();
             }
 
-            if (hasColum)
-                DrawSheetHeaders();
+            bool hasColum = machine.columnHeaderList != null && machine.columnHeaderList.Count != 0;
+            if (hasColum) DrawSheetHeaders();
 
             EditorGUILayout.Separator();
 

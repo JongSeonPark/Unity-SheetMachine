@@ -18,6 +18,16 @@ MonoBehaviour:
   typeRowIndex: 1
   includeIsArrayRow: 0
   arrayRowIndex: 2
+  columnHeaderList:
+  - name: AA
+    isArray: 0
+    type: 1
+  - name: C
+    isArray: 0
+    type: 1
+  - name: ESDA
+    isArray: 0
+    type: 1
   templatePath: SheetMachine/Templates/NewNew
   dataClassTemplatePath: 
   scriptableObjectClassPath: 
