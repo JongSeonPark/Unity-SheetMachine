@@ -16,11 +16,11 @@ MonoBehaviour:
   sheetName: SheetTest
   includeTypeRow: 1
   typeRowIndex: 1
-  includeIsArrayRow: 0
+  includeIsArrayRow: 1
   arrayRowIndex: 2
   columnHeaderList:
   - name: AA
-    isArray: 0
+    isArray: 1
     type: 1
   - name: C
     isArray: 0

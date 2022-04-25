@@ -2,7 +2,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace ChickenGames.SheetMachine.GoogleSheet
+namespace ChickenGames.SheetMachine
 {
     /// <summary>
     /// Abstract class for making reload-proof singletons out of ScriptableObjects

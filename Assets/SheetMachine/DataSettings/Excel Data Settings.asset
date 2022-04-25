@@ -9,12 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27cfa7032d1b38c48a5718460e801c64, type: 3}
-  m_Name: SheetTest
+  m_Script: {fileID: 11500000, guid: 8e9cd0ed596800d41b312f2b781fb1c8, type: 3}
+  m_Name: Excel Data Settings
   m_EditorClassIdentifier: 
-  dataArray:
-  - AA:
-    - 1
-    - 2
-    C: 1
-    ESDA: 
+  templatePath: SheetMachine/Templates
+  runtimeClassPath: SheetMachine/CreatedScrpits/Runtime
+  editorClassPath: SheetMachine/CreatedScrpits/Editor

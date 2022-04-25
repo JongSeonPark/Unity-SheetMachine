@@ -9,14 +9,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 369617750bbbd59419ae050685125c84, type: 3}
-  m_Name: New Google Data Settings
+  m_Script: {fileID: 11500000, guid: 4d84ffd8ae38e084c8b0b720961d017f, type: 3}
+  m_Name: ExcelMachine
   m_EditorClassIdentifier: 
-  scopes: 00000000
-  applicationName: My First Project
-  credentialsPath: SheetMachine/GoogleCredientals/client_secret_844507396674-e736b7vg852npsho3509mfjjj0dfa95n.apps.googleusercontent.com
-    (1).json
-  tokenPath: SheetMachine/GoogleTokens
+  spreadSheetName: 
+  sheetName: 
+  includeTypeRow: 0
+  typeRowIndex: 0
+  includeIsArrayRow: 0
+  arrayRowIndex: 0
+  columnHeaderList: []
   templatePath: SheetMachine/Templates
+  dataClassTemplatePath: 
+  scriptableObjectClassPath: 
   runtimeClassPath: SheetMachine/CreatedScrpits/Runtime
   editorClassPath: SheetMachine/CreatedScrpits/Editor
+  className: 

@@ -20,6 +20,7 @@ namespace ChickenGames.SheetMachine.Utils
         static readonly string RuntimeClassPath = Combine(ProgramPath, "CreatedScrpits", "Runtime");
         static readonly string EditorClassPath = Combine(ProgramPath, "CreatedScrpits", "Editor");
 
+        public static string GetDefaultProgramPath() => ProgramPath;
         public static string GetDefaultTemplatePath() => TemplatePath;
         public static string GetDefaultCredientalPath() => CredientalPath;
         public static string GetDefaultTokenPath() => TokenPath;

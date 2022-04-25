@@ -72,55 +72,6 @@ namespace ChickenGames.SheetMachine.GoogleSheet
                 labelWidth: labelWidth,
                 filePanelTitle: "Open folder"
                 );
-
-            
-            ////
-            //GUILayout.BeginHorizontal();
-            //GUILayout.Label("spreadsheetId: ", GUILayout.Width(LabelWidth));
-            //GoogleDataSettings.Instance.spreadsheetId = GUILayout.TextField(GoogleDataSettings.Instance.spreadsheetId);
-            //GUILayout.EndHorizontal();
-
-            //GUILayout.BeginHorizontal();
-            //GUILayout.Label("range: ", GUILayout.Width(LabelWidth));
-            //GoogleDataSettings.Instance.range = GUILayout.TextField(GoogleDataSettings.Instance.range);
-            //GUILayout.EndHorizontal();
-
-            //if (GUILayout.Button("GetRange"))
-            //{
-            //    GoogleDataSettings.Instance.GetRange();
-            //}
-            //if (GUILayout.Button("CreateSheet"))
-            //{
-            //    GoogleDataSettings.Instance.CreateSheet();
-            //}
-            //if (GUILayout.Button("JustGetRanges"))
-            //{
-            //    GoogleDataSettings.Instance.JustGetRanges();
-            //}
-            //if (GUILayout.Button("ActDataFilter"))
-            //{
-            //    GoogleDataSettings.Instance.ActDataFilter();
-            //}
-            //if (GUILayout.Button("MetaGet"))
-            //{
-            //    GoogleDataSettings.Instance.MetaGet();
-            //}
-            //if (GUILayout.Button("Append"))
-            //{
-            //    GoogleDataSettings.Instance.Append();
-            //}
-            //if (GUILayout.Button("BatchClear"))
-            //{
-            //    GoogleDataSettings.Instance.BatchClear();
-            //}
-            //if (GUILayout.Button("BatchGet"))
-            //{
-            //    GoogleDataSettings.Instance.BatchGet();
-            //}
-            //if (GUILayout.Button("BatchUpdate"))
-            //{
-            //    GoogleDataSettings.Instance.BatchUpdate();
-            //}
         }
     }
 }

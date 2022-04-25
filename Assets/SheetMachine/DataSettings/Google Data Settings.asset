@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 369617750bbbd59419ae050685125c84, type: 3}
+  m_Name: Google Data Settings
+  m_EditorClassIdentifier: 
+  scopes: 00000000
+  applicationName: My First Project
+  credentialsPath: SheetMachine/GoogleCredientals/client_secret_844507396674-e736b7vg852npsho3509mfjjj0dfa95n.apps.googleusercontent.com
+    (1).json
+  tokenPath: SheetMachine/GoogleTokens
+  templatePath: SheetMachine/Templates
+  runtimeClassPath: SheetMachine/CreatedScrpits/Runtime
+  editorClassPath: SheetMachine/CreatedScrpits/Editor

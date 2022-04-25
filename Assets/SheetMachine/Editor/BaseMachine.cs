@@ -99,12 +99,6 @@ namespace ChickenGames.SheetMachine
         public abstract void Import();
         public abstract void Generate();
 
-        [Serializable]
-        public class ColumnHeaderList : List<ColumnHeader>
-        {
-            
-        }
-
         public string CreateMemberFieldsString()
         {
             string result = "\n";
