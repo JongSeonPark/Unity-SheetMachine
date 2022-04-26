@@ -80,6 +80,7 @@ namespace ChickenGames.SheetMachine
     {
         /// <summary>
         /// SpreadSheetName is SpreadSheetId in Google
+        /// SpreadSheetName is excelFilePath in Excel
         /// </summary>
         public string spreadSheetName;
         public string sheetName;
@@ -87,7 +88,6 @@ namespace ChickenGames.SheetMachine
         public int typeRowIndex;
         public bool includeIsArrayRow;
         public int arrayRowIndex;
-        //public ColumnHeaderList columnHeaderList;
         public List<ColumnHeader> columnHeaderList;
         public string templatePath;
         public string dataClassTemplatePath;

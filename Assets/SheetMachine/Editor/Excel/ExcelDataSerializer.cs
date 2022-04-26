@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ChickenGames.SheetMachine.GoogleSheet
+namespace ChickenGames.SheetMachine.ExcelSheet
 {
     public static class ExcelDataSerializer
     {
@@ -64,7 +64,7 @@ namespace ChickenGames.SheetMachine.GoogleSheet
                             value = array;
                         }
                         else
-                        {
+                        {   
                             var values = cell.Split(DELIMETER)
                                 .Select(s => s.Replace(" ", string.Empty))
                                 .ToArray();

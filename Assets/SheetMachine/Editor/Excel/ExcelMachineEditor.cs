@@ -11,7 +11,6 @@ namespace ChickenGames.SheetMachine.ExcelSheet
     [CustomEditor(typeof(ExcelMachine))]
     public class ExcelMachineEditor : BaseMachineEditor
     {
-        string excelDataPath = "";
 
         private void OnEnable()
         {
@@ -22,12 +21,17 @@ namespace ChickenGames.SheetMachine.ExcelSheet
         {
             GUILayout.Label("Script Path Settings:", new GUIStyle(GUI.skin.label));
 
+#if UNITY_EDITOR_WIN
+            var filePanelExtension = "excel files;*.xls;*.xlsx";
+#else // for UNITY_EDITOR_OSX
+            var filePanelExtension = "xls";
+#endif
             GUIHelper.DrawOpenFilePathLayout(
-                pathText: ref excelDataPath,
+                pathText: ref machine.spreadSheetName,
                 defaultPath: PathMethods.GetDefaultProgramPath(),
                 title: "Excel file path:",
                 labelWidth: labelWidth,
-                filePanelExtension: "xls",
+                filePanelExtension: filePanelExtension,
                 filePanelTitle: "Open excel file"
                 );
 

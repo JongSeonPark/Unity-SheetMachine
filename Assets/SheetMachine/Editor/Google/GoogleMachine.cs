@@ -9,6 +9,8 @@ namespace ChickenGames.SheetMachine.GoogleSheet
 {
     public class GoogleMachine : BaseMachine
     {
+        
+
         [MenuItem("Assets/Create/SheetMachine/GoogleMachine")]
         public static void Create()
         {

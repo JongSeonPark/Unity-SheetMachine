@@ -4,9 +4,9 @@ using System.ComponentModel;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ChickenGames.SheetMachine.GoogleSheet
+namespace ChickenGames.SheetMachine
 {
-    public static class GoogleDataSerializer
+    public static class DataSerializer
     {
         public static T[] Deserialize<T>(IList<IList<object>> rows, int dataRowStartIndex)
         {

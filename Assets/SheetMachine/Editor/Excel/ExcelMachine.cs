@@ -2,6 +2,7 @@ using ChickenGames.SheetMachine.Utils;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEditor;
 using UnityEngine;
 
@@ -9,6 +10,8 @@ namespace ChickenGames.SheetMachine.ExcelSheet
 {
     public class ExcelMachine : BaseMachine
     {
+
+
         [MenuItem("Assets/Create/SheetMachine/ExcelMachine")]
         public static void Create()
         {
@@ -30,6 +33,16 @@ namespace ChickenGames.SheetMachine.ExcelSheet
         public override void Import()
         {
             Debug.Log("Import");
+            string path = spreadSheetName;
+            string sheet = sheetName;
+            if (string.IsNullOrEmpty(path) || !File.Exists(path))
+            {
+                string msg = "Can Read Data..";
+                EditorUtility.DisplayDialog("Error", msg, "OK");
+                return;
+            }
+
+       
         }
 
 
