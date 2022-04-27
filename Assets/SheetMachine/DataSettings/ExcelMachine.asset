@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d84ffd8ae38e084c8b0b720961d017f, type: 3}
   m_Name: ExcelMachine
   m_EditorClassIdentifier: 
-  spreadSheetName: 
-  sheetName: 
-  includeTypeRow: 0
-  typeRowIndex: 0
-  includeIsArrayRow: 0
-  arrayRowIndex: 0
+  spreadSheetName: Resources/TEST.xlsx
+  sheetName: SheetTest
+  includeTypeRow: 1
+  typeRowIndex: 1
+  includeIsArrayRow: 1
+  arrayRowIndex: 2
   columnHeaderList: []
   templatePath: SheetMachine/Templates
   dataClassTemplatePath: 

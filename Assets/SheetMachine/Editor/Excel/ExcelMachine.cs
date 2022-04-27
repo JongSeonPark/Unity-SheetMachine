@@ -33,16 +33,25 @@ namespace ChickenGames.SheetMachine.ExcelSheet
         public override void Import()
         {
             Debug.Log("Import");
-            string path = spreadSheetName;
+        
+            string path = PathMethods.Combine(Application.dataPath, spreadSheetName);
             string sheet = sheetName;
-            if (string.IsNullOrEmpty(path) || !File.Exists(path))
+
+            if (!File.Exists(path) || string.IsNullOrEmpty(sheet))
             {
-                string msg = "Can Read Data..";
+                string msg = "";
+                if (!File.Exists(path)) 
+                    msg += $"Can't read data. Path: {path}\n";
+                if (string.IsNullOrEmpty(sheet))
+                    msg += $"sheetName is empty. {sheet}\n";
+
                 EditorUtility.DisplayDialog("Error", msg, "OK");
                 return;
             }
 
-       
+
+            List<ColumnHeader> tmpColumnList = new List<ColumnHeader>();
+
         }
 
 

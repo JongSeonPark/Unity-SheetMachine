@@ -2,6 +2,7 @@ using ChickenGames.SheetMachine.Utils;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEditor;
 using UnityEngine;
 
@@ -32,6 +33,19 @@ namespace ChickenGames.SheetMachine.GoogleSheet
         public override void Import()
         {
             Debug.Log("Import");
+
+            if (string.IsNullOrEmpty(spreadSheetName) || string.IsNullOrEmpty(sheetName))
+            {
+                string msg = "";
+                if (string.IsNullOrEmpty(spreadSheetName))
+                    msg += $"sheetName is empty. {spreadSheetName}\n";
+                if (string.IsNullOrEmpty(sheetName))
+                    msg += $"sheetName is empty. {sheetName}\n";
+
+                EditorUtility.DisplayDialog("Error", msg, "OK");
+                return;
+            }
+
             var sheetRanges = new List<string>()
             {
                 $"{sheetName}!{1}:{1}" // header,
