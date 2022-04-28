@@ -51,7 +51,7 @@ namespace ChickenGames.SheetMachine.ExcelSheet
 
 
             List<ColumnHeader> tmpColumnList = new List<ColumnHeader>();
-
+            new ExcelDataSerializer(path, sheet);
         }
 
 
