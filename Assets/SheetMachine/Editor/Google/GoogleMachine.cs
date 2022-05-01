@@ -70,29 +70,19 @@ namespace ChickenGames.SheetMachine.GoogleSheet
             List<ColumnHeader> tmpColumnList = new List<ColumnHeader>();
 
             var headerRow = batchGetRes.ValueRanges[0].Values[0];
+            var typeRow = includeTypeRow ? batchGetRes.ValueRanges[typeRangeIndex].Values[0] : null;
+            var isArrayRow = includeIsArrayRow ? batchGetRes.ValueRanges[arrayRangeIndex].Values[0] : null;
             for (int i = 0; i < headerRow.Count; i++)
             {
                 string headerName = (string)headerRow[i];
-                string typeStr = null;
-                bool isArray = false;
-                if (includeTypeRow)
-                {
-                    var typeRow = batchGetRes.ValueRanges[typeRangeIndex].Values[0];
-                    typeStr = typeRow.Count > i ? (string)typeRow[i] : null;
-                }
-                if (includeIsArrayRow)
-                {
-                    var isArrayRow = batchGetRes.ValueRanges[arrayRangeIndex].Values[0];
-                    isArray = isArrayRow.Count > i ? (bool)Convert.ChangeType((string)isArrayRow[i], TypeCode.Boolean) : false;
-                }
+                string typeStr = includeTypeRow && typeRow.Count > i ? (string)typeRow[i] : null;
+                bool isArray = includeIsArrayRow && isArrayRow.Count > i ? (bool)Convert.ChangeType((string)isArrayRow[i], TypeCode.Boolean) : false;
                 ColumnHeader column = new ColumnHeader(headerName, isArray, typeStr);
-
                 tmpColumnList.Add(column);
             }
             columnHeaderList = tmpColumnList;
             if (string.IsNullOrEmpty(className)) className = sheetName;
         }
-
 
         public override void Generate()
         {

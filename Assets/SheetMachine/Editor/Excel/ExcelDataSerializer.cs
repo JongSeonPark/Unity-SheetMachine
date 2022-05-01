@@ -58,10 +58,58 @@ namespace ChickenGames.SheetMachine.ExcelSheet
                 for (int j = 0; j < row.LastCellNum; j++)
                 {
                     ICell cell = row.GetCell(j);
-                    Debug.Log($"{(char)(i + 'A')}{j}, cellValue: {cell.StringCellValue} | cellType: {cell.CellType}");
+                    //Debug.Log($"{(char)(i + 'A')}{j}, cellValue: {cell.StringCellValue} | cellType: {cell.CellType}");
+
+
+                    string cellIdx = $"{(char)(i + 'A')}{j}";
+                    string cellVal = "";
+                    switch (cell.CellType)
+                    {
+                        case NPOI.SS.UserModel.CellType.Unknown:
+                            break;
+                        case NPOI.SS.UserModel.CellType.Numeric:
+                            cellVal = cell.NumericCellValue.ToString();
+                            break;
+                        case NPOI.SS.UserModel.CellType.String:
+                            cellVal = cell.StringCellValue;
+                            break;
+                        case NPOI.SS.UserModel.CellType.Formula:
+                            //cellVal = cell.CellFormula;
+                            break;
+                        case NPOI.SS.UserModel.CellType.Blank:
+                            break;
+                        case NPOI.SS.UserModel.CellType.Boolean:
+                            cellVal = cell.BooleanCellValue.ToString();
+                            break;
+                        case NPOI.SS.UserModel.CellType.Error:
+                            break;
+                    }
+                    Debug.Log($"{cellIdx}, cellValue: {cellVal} | cellType: {cell.CellType}");
+
                 }
             }
+
+            var columnHeaders = GetColumHeaeders(1, 2);
         }
 
+        public List<ColumnHeader> GetColumHeaeders(int? typeRangeIndex = null, int? arrayRangeIndex = null)
+        {
+            List<ColumnHeader> tmpColumnList = new List<ColumnHeader>();
+
+            IRow headerRow = sheet.GetRow(0);
+            IRow typeRow = typeRangeIndex.HasValue ? sheet.GetRow(typeRangeIndex.Value) : null ;
+            IRow isArrayRow = arrayRangeIndex.HasValue ? sheet.GetRow(arrayRangeIndex.Value) : null;
+
+            for (int i = 0; i < headerRow.Cells.Count; i++)
+            {
+                string headerName = headerRow.Cells[i].StringCellValue;
+                string typeStr = typeRangeIndex.HasValue && typeRow.Cells.Count > i ? typeRow.Cells[i].StringCellValue : null;
+                bool isArray = arrayRangeIndex.HasValue && isArrayRow.Cells.Count > i ? isArrayRow.Cells[i].BooleanCellValue : false;
+                ColumnHeader column = new ColumnHeader(headerName, isArray, typeStr);
+
+                tmpColumnList.Add(column);
+            }
+            return tmpColumnList;
+        }
     }
 }
