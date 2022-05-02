@@ -96,33 +96,34 @@ namespace ChickenGames.SheetMachine
         public string editorClassPath;
         public string className;
 
+        // 포함된 특수한 Row 중에서 가장 큰 값을 DataStart의 시작 값으로 표현
+        protected int DataStartRowIndex => Mathf.Max(
+                1,
+                includeTypeRow ? typeRowIndex + 1 : 0,
+                includeIsArrayRow ? arrayRowIndex + 1 : 0);
+
+        protected string MemberFieldsString
+        {
+            get
+            {
+                string result = "\n";
+                columnHeaderList.ForEach(header =>
+                {
+                    string type = header.type.ToString().ToLower();
+
+                    // Property 제외
+                    string name = header.name;
+                    string arr = header.isArray ? "[]" : "";
+                    result +=
+                    $"    public {type}{arr} {name};\n" +
+                    $"\n";
+                });
+                return result;
+            }
+        }
+
         public abstract void Import();
         public abstract void Generate();
-
-        public string CreateMemberFieldsString()
-        {
-            string result = "\n";
-            columnHeaderList.ForEach(header =>
-            {
-                string type = header.type.ToString().ToLower();
-
-                // Field는 소문자 시작, property는 대문자 시작
-                //var h = ((char)header.name[0]).ToString();
-                //var r = header.name.Substring(1);
-                //string name = h.ToLower() + r;
-                //string propertyName = h.ToUpper() + r;
-
-                // Property 제외
-                string name = header.name;
-                string arr = header.isArray ? "[]" : "";
-                result +=
-                //$"    [SerializeField]\n" +
-                $"    public {type}{arr} {name};\n" +
-                $"\n";
-                //$"    private {type}{arr} {name};\n" + 
-                //$"    public {type}{arr} {propertyName} {{ get => {name}; set => {name}; }};\n";
-            });
-            return result;
-        }
+        
     }
 }

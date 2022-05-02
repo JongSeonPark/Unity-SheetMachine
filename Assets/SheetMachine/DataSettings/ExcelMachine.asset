@@ -18,10 +18,25 @@ MonoBehaviour:
   typeRowIndex: 1
   includeIsArrayRow: 1
   arrayRowIndex: 2
-  columnHeaderList: []
+  columnHeaderList:
+  - name: AA
+    isArray: 1
+    type: 1
+  - name: C
+    isArray: 0
+    type: 1
+  - name: ESDA
+    isArray: 0
+    type: 1
+  - name: ASDdd
+    isArray: 0
+    type: 3
+  - name: asd
+    isArray: 1
+    type: 5
   templatePath: SheetMachine/Templates
   dataClassTemplatePath: 
   scriptableObjectClassPath: 
   runtimeClassPath: SheetMachine/CreatedScrpits/Runtime
   editorClassPath: SheetMachine/CreatedScrpits/Editor
-  className: 
+  className: SheetTest

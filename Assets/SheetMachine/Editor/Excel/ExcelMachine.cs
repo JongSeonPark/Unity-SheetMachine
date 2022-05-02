@@ -48,10 +48,16 @@ namespace ChickenGames.SheetMachine.ExcelSheet
                 EditorUtility.DisplayDialog("Error", msg, "OK");
                 return;
             }
+            
+            var serializer = new ExcelDataSerializer(path, sheet);
 
+            int? typeRow = null;
+            int? arrayRow = null;
+            if (includeTypeRow) typeRow = typeRowIndex;
+            if (includeIsArrayRow) arrayRow = arrayRowIndex;
+            columnHeaderList = serializer.GetColumnHeaders(typeRow, arrayRow);
 
-            List<ColumnHeader> tmpColumnList = new List<ColumnHeader>();
-            new ExcelDataSerializer(path, sheet);
+            if (string.IsNullOrEmpty(className)) className = sheetName;
         }
 
 
@@ -59,20 +65,14 @@ namespace ChickenGames.SheetMachine.ExcelSheet
         {
             Debug.Log("Generate");
 
-            // 포함된 특수한 Row 중에서 가장 큰 값을 DataStart의 시작 값으로 표현
-            int dataStartRowIndex = Mathf.Max(
-                1,
-                includeTypeRow ? typeRowIndex + 1 : 0,
-                includeIsArrayRow ? arrayRowIndex + 1 : 0);
-
             Dictionary<string, string> scriptPrescription = new Dictionary<string, string>()
             {
                 { "ClassName", className },
                 { "DataClassName", className + "Data" },
                 { "SpreadsheetName", spreadSheetName },
                 { "WorksheetName", sheetName },
-                { "DataStartRowIndex", dataStartRowIndex.ToString() },
-                { "MemberFields", CreateMemberFieldsString() },
+                { "DataStartRowIndex", DataStartRowIndex.ToString() },
+                { "MemberFields", MemberFieldsString },
             };
 
             ScriptsGenerator.Generate(
