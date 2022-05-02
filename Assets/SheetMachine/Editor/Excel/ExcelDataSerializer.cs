@@ -58,7 +58,7 @@ namespace ChickenGames.SheetMachine.ExcelSheet
                 for (int j = 0; j < row.LastCellNum; j++)
                 {
                     ICell cell = row.GetCell(j);
-
+                    cell.SetCellType(NPOI.SS.UserModel.CellType.String);
                     string cellIdx = $"{(char)(i + 'A')}{j}";
                     string cellVal = "";
                     switch (cell.CellType)
@@ -139,17 +139,21 @@ namespace ChickenGames.SheetMachine.ExcelSheet
                 for (int i = 0; i < headerRowInfo.Count; i++)
                 {
                     var headerInfo = headerRowInfo[i];
-                    var cell = row.LastCellNum > headerInfo.index ? (string)row[headerInfo.index] : "";
+                    var cell = row.GetCell(i);
                     var type = headerInfo.field.FieldType;
                     object value = new object();
+                    cell.SetCellType(NPOI.SS.UserModel.CellType.String);
+                    var cellData = row.LastCellNum > headerInfo.index ? row.GetCell(i).StringCellValue : "";
 
-                    if (type.IsArray)
+                    if (type.IsArray && row.GetCell(i).CellType == NPOI.SS.UserModel.CellType.String)
                     {
+                        //var cellData = row.LastCellNum > headerInfo.index ? row.GetCell(i).StringCellValue : "";
+
                         const char DELIMETER = ','; // '\n'
 
                         if (type.GetElementType().IsEnum)
                         {
-                            var values = cell.Split(DELIMETER)
+                            var values = cellData.Split(DELIMETER)
                                 .Select(s => s.Replace(" ", string.Empty))
                                 .Select(i => Enum.Parse(type.GetElementType(), i))
                                 .ToArray();
@@ -165,7 +169,7 @@ namespace ChickenGames.SheetMachine.ExcelSheet
                         }
                         else
                         {
-                            var values = cell.Split(DELIMETER)
+                            var values = cellData.Split(DELIMETER)
                                 .Select(s => s.Replace(" ", string.Empty))
                                 .ToArray();
 
@@ -182,14 +186,15 @@ namespace ChickenGames.SheetMachine.ExcelSheet
                     }
                     else
                     {
+                        
                         if (type.IsEnum)
                         {
-                            value = Enum.Parse(type, cell.Replace(" ", string.Empty));
+                            value = Enum.Parse(type, cellData.Replace(" ", string.Empty));
                         }
                         else
                         {
-                            if (cell == "" && type != typeof(string))
-                                cell = "0";
+                            if (cellData == "" && type != typeof(string))
+                                cellData = "0";
 
                             value = Convert.ChangeType(cell, type);
                         }
@@ -207,3 +212,4 @@ namespace ChickenGames.SheetMachine.ExcelSheet
             public FieldInfo field;
         }
     }
+}
