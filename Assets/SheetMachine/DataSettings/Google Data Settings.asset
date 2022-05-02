@@ -17,6 +17,6 @@ MonoBehaviour:
   credentialsPath: SheetMachine/GoogleCredientals/client_secret_844507396674-e736b7vg852npsho3509mfjjj0dfa95n.apps.googleusercontent.com
     (1).json
   tokenPath: SheetMachine/GoogleTokens
-  templatePath: SheetMachine/Templates
+  templatePath: SheetMachine/Templates/GoogleTemplates
   runtimeClassPath: SheetMachine/CreatedScrpits/Runtime
   editorClassPath: SheetMachine/CreatedScrpits/Editor

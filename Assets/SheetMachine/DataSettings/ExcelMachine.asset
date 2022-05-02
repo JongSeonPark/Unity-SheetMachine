@@ -34,9 +34,9 @@ MonoBehaviour:
   - name: asd
     isArray: 1
     type: 5
-  templatePath: SheetMachine/Templates
+  templatePath: SheetMachine/Templates/ExcelTemplates
   dataClassTemplatePath: 
   scriptableObjectClassPath: 
   runtimeClassPath: SheetMachine/CreatedScrpits/Runtime
   editorClassPath: SheetMachine/CreatedScrpits/Editor
-  className: SheetTest
+  className: SheetTest2

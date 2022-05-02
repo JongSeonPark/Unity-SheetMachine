@@ -28,7 +28,7 @@ MonoBehaviour:
   - name: ESDA
     isArray: 0
     type: 1
-  templatePath: SheetMachine/Templates/NewNew
+  templatePath: SheetMachine/Templates/GoogleTemplates
   dataClassTemplatePath: 
   scriptableObjectClassPath: 
   runtimeClassPath: SheetMachine/CreatedScrpits/Runtime

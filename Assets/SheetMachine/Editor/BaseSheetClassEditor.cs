@@ -22,3 +22,9 @@ public abstract class BaseSheetClassEditor : Editor
 public abstract class BaseGoogleClassEditor : BaseSheetClassEditor
 {
 }
+
+
+public abstract class BaseExcelClassEditor : BaseSheetClassEditor
+{
+}
+

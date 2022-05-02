@@ -82,8 +82,7 @@ namespace ChickenGames.SheetMachine.ExcelSheet
                         case NPOI.SS.UserModel.CellType.Error:
                             break;
                     }
-                    Debug.Log($"{cellIdx}, cellValue: {cellVal} | cellType: {cell.CellType}");
-
+                    //Debug.Log($"{cellIdx}, cellValue: {cellVal} | cellType: {cell.CellType}");
                 }
             }
         }
@@ -145,7 +144,7 @@ namespace ChickenGames.SheetMachine.ExcelSheet
                     cell.SetCellType(NPOI.SS.UserModel.CellType.String);
                     var cellData = row.LastCellNum > headerInfo.index ? row.GetCell(i).StringCellValue : "";
 
-                    if (type.IsArray && row.GetCell(i).CellType == NPOI.SS.UserModel.CellType.String)
+                    if (type.IsArray)
                     {
                         //var cellData = row.LastCellNum > headerInfo.index ? row.GetCell(i).StringCellValue : "";
 
@@ -196,7 +195,7 @@ namespace ChickenGames.SheetMachine.ExcelSheet
                             if (cellData == "" && type != typeof(string))
                                 cellData = "0";
 
-                            value = Convert.ChangeType(cell, type);
+                            value = Convert.ChangeType(cellData, type);
                         }
                     }
                     headerInfo.field.SetValue(inst, value);

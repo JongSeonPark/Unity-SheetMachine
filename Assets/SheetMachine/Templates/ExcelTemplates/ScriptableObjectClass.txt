@@ -1,0 +1,26 @@
+using UnityEngine;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+
+[System.Serializable]
+[CreateAssetMenu(fileName = "$ClassName", menuName = "SheetMachine/Data/Excel/$ClassName")]
+public class $ClassName : ScriptableObject 
+{
+    [HideInInspector] [SerializeField] 
+    public readonly string SpreadSheetName = "$SpreadsheetName";
+    
+    [HideInInspector] [SerializeField] 
+    public readonly string WorksheetName = "$WorksheetName";
+    
+    // Note: initialize in OnEnable() not here.
+    public $DataClassName[] dataArray;
+
+    public readonly int typeRowIndex = $DataStartRowIndex;    
+
+    void OnEnable()
+    {
+        if (dataArray == null)
+            dataArray = new $DataClassName[0];
+    }
+}
