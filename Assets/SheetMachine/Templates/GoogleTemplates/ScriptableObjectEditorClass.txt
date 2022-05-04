@@ -13,7 +13,7 @@ public class $ClassNameEditor : BaseGoogleClassEditor
         var req = GoogleDataSettings.Instance.Service.Spreadsheets.Values.Get(targetData.SpreadSheetName, targetData.WorksheetName);
         var res = req.Execute();
         var rows = res.Values;
-        targetData.dataArray = GoogleDataSerializer.Deserialize<$DataClassName>(rows, targetData.typeRowIndex);
+        targetData.dataArray = new GoogleDataSerializer().Deserialize<$DataClassName>(rows, targetData.typeRowIndex);
         
         EditorUtility.SetDirty(targetData);
         AssetDatabase.SaveAssets();

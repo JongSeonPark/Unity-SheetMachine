@@ -16,7 +16,7 @@ public class SheetTestEditor : BaseGoogleClassEditor
         var req = GoogleDataSettings.Instance.Service.Spreadsheets.Values.Get(targetData.SpreadSheetName, targetData.WorksheetName);
         var res = req.Execute();
         var rows = res.Values;
-        targetData.dataArray = GoogleDataSerializer.Deserialize<SheetTestData>(rows, targetData.typeRowIndex);
+        targetData.dataArray = new GoogleDataSerializer().Deserialize<SheetTestData>(rows, targetData.typeRowIndex);
         
         EditorUtility.SetDirty(targetData);
         AssetDatabase.SaveAssets();

@@ -12,7 +12,7 @@ using NPOI.XSSF.UserModel;
 
 namespace ChickenGames.SheetMachine.ExcelSheet
 {
-    public class ExcelDataSerializer
+    public class ExcelDataSerializer : BaseDataSerializer
     {
         private readonly IWorkbook workbook = null;
         private readonly ISheet sheet = null;
@@ -63,23 +63,20 @@ namespace ChickenGames.SheetMachine.ExcelSheet
                     string cellVal = "";
                     switch (cell.CellType)
                     {
-                        case NPOI.SS.UserModel.CellType.Unknown:
-                            break;
                         case NPOI.SS.UserModel.CellType.Numeric:
                             cellVal = cell.NumericCellValue.ToString();
                             break;
                         case NPOI.SS.UserModel.CellType.String:
                             cellVal = cell.StringCellValue;
                             break;
-                        case NPOI.SS.UserModel.CellType.Formula:
-                            //cellVal = cell.CellFormula;
-                            break;
-                        case NPOI.SS.UserModel.CellType.Blank:
-                            break;
                         case NPOI.SS.UserModel.CellType.Boolean:
                             cellVal = cell.BooleanCellValue.ToString();
                             break;
-                        case NPOI.SS.UserModel.CellType.Error:
+                        case NPOI.SS.UserModel.CellType.Formula: break;
+                        case NPOI.SS.UserModel.CellType.Blank: break;
+                        case NPOI.SS.UserModel.CellType.Error: break;
+                        case NPOI.SS.UserModel.CellType.Unknown: break;
+                        default:
                             break;
                     }
                     //Debug.Log($"{cellIdx}, cellValue: {cellVal} | cellType: {cell.CellType}");
@@ -112,23 +109,8 @@ namespace ChickenGames.SheetMachine.ExcelSheet
             Type t = typeof(T);
             List<T> r = new List<T>();
 
-            List<HeaderRowInfo> headerRowInfo = new List<HeaderRowInfo>();
             var headerRow = sheet.GetRow(0);
-
-            for (int i = 0; i < headerRow.Cells.Count; i++)
-            {
-                var header = headerRow.GetCell(i).StringCellValue;
-
-                var field = t.GetField(header, BindingFlags.IgnoreCase | BindingFlags.Instance | BindingFlags.Public);
-                if (field != null)
-                {
-                    headerRowInfo.Add(new HeaderRowInfo
-                    {
-                        index = i,
-                        field = field,
-                    });
-                }
-            }
+            List<HeaderRowInfo> headerRowInfo = GetHeaderRowInfos<T>(headerRow.Select(cell => cell.StringCellValue).ToList());
 
             for (int j = dataRowStartIndex; j < sheet.LastRowNum; j++)
             {
@@ -139,76 +121,33 @@ namespace ChickenGames.SheetMachine.ExcelSheet
                 {
                     var headerInfo = headerRowInfo[i];
                     var cell = row.GetCell(i);
-                    var type = headerInfo.field.FieldType;
                     object value = new object();
-                    cell.SetCellType(NPOI.SS.UserModel.CellType.String);
-                    var cellData = row.LastCellNum > headerInfo.index ? row.GetCell(i).StringCellValue : "";
 
-                    if (type.IsArray)
+                    switch(cell.CellType)
                     {
-                        //var cellData = row.LastCellNum > headerInfo.index ? row.GetCell(i).StringCellValue : "";
-
-                        const char DELIMETER = ','; // '\n'
-
-                        if (type.GetElementType().IsEnum)
-                        {
-                            var values = cellData.Split(DELIMETER)
-                                .Select(s => s.Replace(" ", string.Empty))
-                                .Select(i => Enum.Parse(type.GetElementType(), i))
-                                .ToArray();
-
-                            Array array = (Array)Activator.CreateInstance(type, values.Length);
-
-                            for (int k = 0; k < values.Length; k++)
-                            {
-                                array.SetValue(values[k], k);
-                            }
-
-                            value = array;
-                        }
-                        else
-                        {
-                            var values = cellData.Split(DELIMETER)
-                                .Select(s => s.Replace(" ", string.Empty))
-                                .ToArray();
-
-                            Array array = (Array)Activator.CreateInstance(type, values.Length);
-
-                            for (int k = 0; k < values.Length; k++)
-                            {
-                                var temp = Convert.ChangeType(values[k], type.GetElementType());
-                                array.SetValue(temp, k);
-                            }
-
-                            value = array;
-                        }
+                        case NPOI.SS.UserModel.CellType.Numeric:
+                            value = ParseCellData<T>(headerInfo, "");
+                            break;
+                        case NPOI.SS.UserModel.CellType.String:
+                            value = ParseCellData<T>(headerInfo, cell.StringCellValue);
+                            break;
+                        case NPOI.SS.UserModel.CellType.Boolean:
+                            value = ParseCellData<T>(headerInfo, "");
+                            break;
+                        case NPOI.SS.UserModel.CellType.Formula:
+                        case NPOI.SS.UserModel.CellType.Blank:
+                        case NPOI.SS.UserModel.CellType.Error:
+                        case NPOI.SS.UserModel.CellType.Unknown:
+                        default:
+                            value = ParseCellData<T>(headerInfo, "");
+                            break;
                     }
-                    else
-                    {
-                        
-                        if (type.IsEnum)
-                        {
-                            value = Enum.Parse(type, cellData.Replace(" ", string.Empty));
-                        }
-                        else
-                        {
-                            if (cellData == "" && type != typeof(string))
-                                cellData = "0";
-
-                            value = Convert.ChangeType(cellData, type);
-                        }
-                    }
+                    
                     headerInfo.field.SetValue(inst, value);
                 }
                 r.Add(inst);
             }
-            return null;
-        }
-
-        class HeaderRowInfo
-        {
-            public int index;
-            public FieldInfo field;
+            return r.ToArray();
         }
     }
 }
