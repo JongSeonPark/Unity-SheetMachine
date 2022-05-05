@@ -17,8 +17,7 @@ public class $ClassNameEditor : BaseExcelClassEditor
 
         string sheet = targetData.WorksheetName;
 
-        ExcelDataSerializer serializer = new ExcelDataSerializer(path, sheet);
-        targetData.dataArray = serializer.Deserialize<$DataClassName>(targetData.typeRowIndex);
+        targetData.dataArray = new ExcelDataSerializer(path, sheet).Deserialize<$DataClassName>(targetData.typeRowIndex);
         EditorUtility.SetDirty(targetData);
         AssetDatabase.SaveAssets();
 

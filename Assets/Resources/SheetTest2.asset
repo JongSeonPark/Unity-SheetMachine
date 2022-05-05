@@ -12,4 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5514433c8360cf43afd91e7f665b7d4, type: 3}
   m_Name: SheetTest2
   m_EditorClassIdentifier: 
-  dataArray: []
+  dataArray:
+  - AA:
+    - 1
+    - 2
+    C: 1
+    ESDA: 2, 3
+    ASDdd: 3
+    asd:
+    - 4
+  - AA:
+    - zz
+    C: aa
+    ESDA: w
+    ASDdd: 3
+    asd:
+    - 44622
+  - AA: []
+    C: 
+    ESDA: d
+    ASDdd: 0
+    asd: []

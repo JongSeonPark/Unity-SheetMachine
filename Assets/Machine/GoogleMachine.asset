@@ -16,18 +16,22 @@ MonoBehaviour:
   sheetName: SheetTest
   includeTypeRow: 1
   typeRowIndex: 1
-  includeIsArrayRow: 1
-  arrayRowIndex: 2
   columnHeaderList:
   - name: AA
-    isArray: 1
+    isArray: 0
     type: 1
   - name: C
-    isArray: 0
+    isArray: 1
     type: 1
   - name: ESDA
     isArray: 0
     type: 1
+  - name: ASDdd
+    isArray: 0
+    type: 3
+  - name: asd
+    isArray: 0
+    type: 5
   templatePath: SheetMachine/Templates/GoogleTemplates
   dataClassTemplatePath: 
   scriptableObjectClassPath: 

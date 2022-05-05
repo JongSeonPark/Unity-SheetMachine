@@ -1,10 +1,6 @@
 using UnityEngine;
 using System.Collections;
 
-///
-/// !!! Machine generated code !!!
-/// !!! DO NOT CHANGE Tabs to Spaces !!!
-///
 [System.Serializable]
 public class SheetTestData
 {
@@ -14,6 +10,10 @@ public class SheetTestData
     public string C;
 
     public string ESDA;
+
+    public int ASDdd;
+
+    public float[] asd;
 
 
 }

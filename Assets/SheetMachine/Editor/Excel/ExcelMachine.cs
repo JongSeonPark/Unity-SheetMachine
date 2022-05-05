@@ -54,7 +54,6 @@ namespace ChickenGames.SheetMachine.ExcelSheet
             int? typeRow = null;
             int? arrayRow = null;
             if (includeTypeRow) typeRow = typeRowIndex;
-            if (includeIsArrayRow) arrayRow = arrayRowIndex;
             columnHeaderList = serializer.GetColumnHeaders(typeRow, arrayRow);
 
             if (string.IsNullOrEmpty(className)) className = sheetName;

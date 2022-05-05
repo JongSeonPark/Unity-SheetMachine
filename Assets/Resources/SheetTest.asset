@@ -18,11 +18,19 @@ MonoBehaviour:
     - 2
     C: 1
     ESDA: 2
+    ASDdd: 3
+    asd:
+    - 4
   - AA:
     - zz
     C: aa
     ESDA: w
-  - AA:
-    - 
+    ASDdd: 3
+    asd:
+    - 3
+    - 2
+  - AA: []
     C: 
     ESDA: d
+    ASDdd: 0
+    asd: []

@@ -35,19 +35,27 @@ namespace ChickenGames.SheetMachine
                 }
                 else
                 {
-                    var values = cellData.Split(DELIMETER)
+                    if (string.IsNullOrEmpty(cellData)) 
+                        value = null;
+                    else
+                    {
+                        var values = cellData.Split(DELIMETER)
                         .Select(s => s.Replace(" ", string.Empty))
                         .ToArray();
 
-                    Array array = (Array)Activator.CreateInstance(type, values.Length);
+                        Array array = (Array)Activator.CreateInstance(type, values.Length);
 
-                    for (int k = 0; k < values.Length; k++)
-                    {
-                        var temp = Convert.ChangeType(values[k], type.GetElementType());
-                        array.SetValue(temp, k);
+                        for (int k = 0; k < values.Length; k++)
+                        {
+                            var v = values[k];
+                            if (v == "" && type != typeof(string))
+                                v = "0";
+                            var temp = Convert.ChangeType(v, type.GetElementType());
+                            array.SetValue(temp, k);
+                        }
+
+                        value = array;
                     }
-
-                    value = array;
                 }
             }
             else
@@ -58,9 +66,12 @@ namespace ChickenGames.SheetMachine
                 }
                 else
                 {
+                    if (type == typeof(int))
+                        cellData = cellData.Split('.')[0];
+
                     if (cellData == "" && type != typeof(string))
                         cellData = "0";
-
+                    
                     value = Convert.ChangeType(cellData, type);
                 }
             }

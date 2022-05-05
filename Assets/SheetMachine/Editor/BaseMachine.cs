@@ -33,14 +33,20 @@ namespace ChickenGames.SheetMachine
             this.type = type;
         }
 
-        public ColumnHeader(string name, bool isArray, string typeStr = null)
+        public ColumnHeader(string name, string typeStr = null)
         {
             this.name = name.Replace(" ", string.Empty);
-            this.isArray = isArray;
-
-            type = CellType.Undefined;
-            if (typeStr != null)
-                Enum.TryParse(typeStr, true, out type);
+            
+            if (string.IsNullOrEmpty(typeStr))
+            {
+                type = CellType.Undefined;
+            }
+            else
+            {
+                isArray = typeStr.Contains("[]");
+                var temp = isArray ? typeStr.Split(new string[] { "[]" }, StringSplitOptions.RemoveEmptyEntries)[0] : typeStr;
+                Enum.TryParse(temp, true, out type);
+            }
         }
     }
 
@@ -86,8 +92,6 @@ namespace ChickenGames.SheetMachine
         public string sheetName;
         public bool includeTypeRow;
         public int typeRowIndex;
-        public bool includeIsArrayRow;
-        public int arrayRowIndex;
         public List<ColumnHeader> columnHeaderList;
         public string templatePath;
         public string dataClassTemplatePath;
@@ -99,8 +103,7 @@ namespace ChickenGames.SheetMachine
         // 포함된 특수한 Row 중에서 가장 큰 값을 DataStart의 시작 값으로 표현
         protected int DataStartRowIndex => Mathf.Max(
                 1,
-                includeTypeRow ? typeRowIndex + 1 : 0,
-                includeIsArrayRow ? arrayRowIndex + 1 : 0);
+                includeTypeRow ? typeRowIndex + 1 : 0);
 
         protected string MemberFieldsString
         {

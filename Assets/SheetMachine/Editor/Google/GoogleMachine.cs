@@ -49,19 +49,13 @@ namespace ChickenGames.SheetMachine.GoogleSheet
                 $"{sheetName}!{1}:{1}" // header,
             };
 
-            int typeRangeIndex = 0, arrayRangeIndex = 0;
+            int typeRangeIndex = 0;
 
             if (includeTypeRow)
             {
                 typeRangeIndex = sheetRanges.Count;
                 sheetRanges.Add($"{sheetName}!{typeRowIndex + 1}:{typeRowIndex + 1}"); // typeRow
             }
-            if (includeIsArrayRow)
-            {
-                arrayRangeIndex = sheetRanges.Count;
-                sheetRanges.Add($"{sheetName}!{arrayRowIndex + 1}:{arrayRowIndex + 1}"); // ArrayRow
-            }
-
 
             var batchGetReq = GoogleDataSettings.Instance.Service.Spreadsheets.Values.BatchGet(spreadSheetName);
             batchGetReq.Ranges = sheetRanges;
@@ -71,13 +65,11 @@ namespace ChickenGames.SheetMachine.GoogleSheet
 
             var headerRow = batchGetRes.ValueRanges[0].Values[0];
             var typeRow = includeTypeRow ? batchGetRes.ValueRanges[typeRangeIndex].Values[0] : null;
-            var isArrayRow = includeIsArrayRow ? batchGetRes.ValueRanges[arrayRangeIndex].Values[0] : null;
             for (int i = 0; i < headerRow.Count; i++)
             {
                 string headerName = (string)headerRow[i];
                 string typeStr = includeTypeRow && typeRow.Count > i ? (string)typeRow[i] : null;
-                bool isArray = includeIsArrayRow && isArrayRow.Count > i ? (bool)Convert.ChangeType((string)isArrayRow[i], TypeCode.Boolean) : false;
-                ColumnHeader column = new ColumnHeader(headerName, isArray, typeStr);
+                ColumnHeader column = new ColumnHeader(headerName, typeStr);
                 tmpColumnList.Add(column);
             }
             columnHeaderList = tmpColumnList;

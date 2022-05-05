@@ -23,14 +23,6 @@ namespace ChickenGames.SheetMachine
                     machine.typeRowIndex = EditorGUILayout.IntField("Type Row: ", machine.typeRowIndex);
             }
 
-            using (new EditorGUILayout.VerticalScope("box"))
-            {
-                machine.includeIsArrayRow = EditorGUILayout.Toggle("Include isArray Row: ", machine.includeIsArrayRow);
-                
-                if (machine.includeIsArrayRow)
-                    machine.arrayRowIndex = EditorGUILayout.IntField("isArray Row: ", machine.arrayRowIndex);
-            }
-
             if (GUILayout.Button("Import"))
             {
                 machine.Import();

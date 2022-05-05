@@ -3,9 +3,6 @@ using UnityEditor;
 using ChickenGames.SheetMachine;
 using ChickenGames.SheetMachine.GoogleSheet;
 
-///
-/// !!! Machine generated code !!!
-///
 [CustomEditor(typeof(SheetTest))]
 public class SheetTestEditor : BaseGoogleClassEditor
 {	    

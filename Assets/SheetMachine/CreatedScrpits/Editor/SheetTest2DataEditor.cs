@@ -17,8 +17,7 @@ public class SheetTest2Editor : BaseExcelClassEditor
 
         string sheet = targetData.WorksheetName;
 
-        ExcelDataSerializer serializer = new ExcelDataSerializer(path, sheet);
-        targetData.dataArray = serializer.Deserialize<SheetTest2Data>(targetData.typeRowIndex);
+        targetData.dataArray = new ExcelDataSerializer(path, sheet).Deserialize<SheetTest2Data>(targetData.typeRowIndex);
         EditorUtility.SetDirty(targetData);
         AssetDatabase.SaveAssets();
 

@@ -51,37 +51,6 @@ namespace ChickenGames.SheetMachine.ExcelSheet
             {
                 Debug.LogError(e.Message);
             }
-
-            for (int i = 0; i < sheet.LastRowNum; i++)
-            {
-                IRow row = sheet.GetRow(i);
-                for (int j = 0; j < row.LastCellNum; j++)
-                {
-                    ICell cell = row.GetCell(j);
-                    cell.SetCellType(NPOI.SS.UserModel.CellType.String);
-                    string cellIdx = $"{(char)(i + 'A')}{j}";
-                    string cellVal = "";
-                    switch (cell.CellType)
-                    {
-                        case NPOI.SS.UserModel.CellType.Numeric:
-                            cellVal = cell.NumericCellValue.ToString();
-                            break;
-                        case NPOI.SS.UserModel.CellType.String:
-                            cellVal = cell.StringCellValue;
-                            break;
-                        case NPOI.SS.UserModel.CellType.Boolean:
-                            cellVal = cell.BooleanCellValue.ToString();
-                            break;
-                        case NPOI.SS.UserModel.CellType.Formula: break;
-                        case NPOI.SS.UserModel.CellType.Blank: break;
-                        case NPOI.SS.UserModel.CellType.Error: break;
-                        case NPOI.SS.UserModel.CellType.Unknown: break;
-                        default:
-                            break;
-                    }
-                    //Debug.Log($"{cellIdx}, cellValue: {cellVal} | cellType: {cell.CellType}");
-                }
-            }
         }
 
         public List<ColumnHeader> GetColumnHeaders(int? typeRangeIndex = null, int? arrayRangeIndex = null)
@@ -97,7 +66,7 @@ namespace ChickenGames.SheetMachine.ExcelSheet
                 string headerName = headerRow.Cells[i].StringCellValue;
                 string typeStr = typeRangeIndex.HasValue && typeRow.Cells.Count > i ? typeRow.Cells[i].StringCellValue : null;
                 bool isArray = arrayRangeIndex.HasValue && isArrayRow.Cells.Count > i ? isArrayRow.Cells[i].BooleanCellValue : false;
-                ColumnHeader column = new ColumnHeader(headerName, isArray, typeStr);
+                ColumnHeader column = new ColumnHeader(headerName, typeStr);
 
                 tmpColumnList.Add(column);
             }
@@ -112,7 +81,7 @@ namespace ChickenGames.SheetMachine.ExcelSheet
             var headerRow = sheet.GetRow(0);
             List<HeaderRowInfo> headerRowInfo = GetHeaderRowInfos<T>(headerRow.Select(cell => cell.StringCellValue).ToList());
 
-            for (int j = dataRowStartIndex; j < sheet.LastRowNum; j++)
+            for (int j = dataRowStartIndex; j < sheet.PhysicalNumberOfRows; j++)
             {
                 T inst = (T)Activator.CreateInstance(t);
                 var row = sheet.GetRow(j);
@@ -120,34 +89,66 @@ namespace ChickenGames.SheetMachine.ExcelSheet
                 for (int i = 0; i < headerRowInfo.Count; i++)
                 {
                     var headerInfo = headerRowInfo[i];
-                    var cell = row.GetCell(i);
+                    var cell = row.GetCell(i, MissingCellPolicy.CREATE_NULL_AS_BLANK);
                     object value = new object();
 
-                    switch(cell.CellType)
+                    try
                     {
-                        case NPOI.SS.UserModel.CellType.Numeric:
-                            value = ParseCellData<T>(headerInfo, "");
-                            break;
-                        case NPOI.SS.UserModel.CellType.String:
-                            value = ParseCellData<T>(headerInfo, cell.StringCellValue);
-                            break;
-                        case NPOI.SS.UserModel.CellType.Boolean:
-                            value = ParseCellData<T>(headerInfo, "");
-                            break;
-                        case NPOI.SS.UserModel.CellType.Formula:
-                        case NPOI.SS.UserModel.CellType.Blank:
-                        case NPOI.SS.UserModel.CellType.Error:
-                        case NPOI.SS.UserModel.CellType.Unknown:
-                        default:
-                            value = ParseCellData<T>(headerInfo, "");
-                            break;
+                        value = GetCellValue<T>(headerInfo, cell);
                     }
-                    
+                    catch
+                    {
+                        string cellIdx = $"{(char)(i + 'A')}{j + 1}";
+                        string cellVal = "";
+                        switch (cell.CellType)
+                        {
+                            case NPOI.SS.UserModel.CellType.Numeric:
+                                cellVal = cell.NumericCellValue.ToString();
+                                break;
+                            case NPOI.SS.UserModel.CellType.String:
+                                cellVal = cell.StringCellValue;
+                                break;
+                            case NPOI.SS.UserModel.CellType.Boolean:
+                                cellVal = cell.BooleanCellValue.ToString();
+                                break;
+                            case NPOI.SS.UserModel.CellType.Formula: break;
+                            case NPOI.SS.UserModel.CellType.Blank: break;
+                            case NPOI.SS.UserModel.CellType.Error: break;
+                            case NPOI.SS.UserModel.CellType.Unknown: break;
+                            default:
+                                break;
+                        }
+
+                        string msg = $"{cellIdx}, cellValue: {cellVal}";
+                        if (cell != null) msg += $" | cellType: {cell.CellType}";
+                        msg += $"\nFieldName: {headerInfo.field.Name}, Field Type: {headerInfo.field.FieldType}";
+                        Debug.Log(msg);
+                    }
+
                     headerInfo.field.SetValue(inst, value);
                 }
                 r.Add(inst);
             }
             return r.ToArray();
+        }
+
+        object GetCellValue<T>(HeaderRowInfo headerInfo, ICell cell)
+        {
+            switch (cell.CellType)
+            {
+                case NPOI.SS.UserModel.CellType.Numeric:
+                    return ParseCellData<T>(headerInfo, cell.NumericCellValue.ToString());
+                case NPOI.SS.UserModel.CellType.String:
+                    return ParseCellData<T>(headerInfo, cell.StringCellValue);
+                case NPOI.SS.UserModel.CellType.Boolean:
+                    return cell.BooleanCellValue;
+                case NPOI.SS.UserModel.CellType.Formula:
+                case NPOI.SS.UserModel.CellType.Blank:
+                case NPOI.SS.UserModel.CellType.Error:
+                case NPOI.SS.UserModel.CellType.Unknown:
+                default:
+                    return ParseCellData<T>(headerInfo, "");
+            }
         }
     }
 }
