@@ -13,6 +13,9 @@ namespace ChickenGames.SheetMachine
             var type = headerRowInfo.field.FieldType;
             object value = new object();
 
+            if (type != typeof(string) && type != typeof(string[]))
+                cellData = cellData.Replace(" ", string.Empty);
+
             if (type.IsArray)
             {
                 const char DELIMETER = ','; // '\n'
@@ -20,7 +23,6 @@ namespace ChickenGames.SheetMachine
                 if (type.GetElementType().IsEnum)
                 {
                     var values = cellData.Split(DELIMETER)
-                        .Select(s => s.Replace(" ", string.Empty))
                         .Select(i => Enum.Parse(type.GetElementType(), i))
                         .ToArray();
 
@@ -39,9 +41,7 @@ namespace ChickenGames.SheetMachine
                         value = null;
                     else
                     {
-                        var values = cellData.Split(DELIMETER)
-                        .Select(s => s.Replace(" ", string.Empty))
-                        .ToArray();
+                        var values = cellData.Split(DELIMETER);
 
                         Array array = (Array)Activator.CreateInstance(type, values.Length);
 
@@ -62,7 +62,7 @@ namespace ChickenGames.SheetMachine
             {
                 if (type.IsEnum)
                 {
-                    value = Enum.Parse(type, cellData.Replace(" ", string.Empty));
+                    value = Enum.Parse(type, cellData);
                 }
                 else
                 {

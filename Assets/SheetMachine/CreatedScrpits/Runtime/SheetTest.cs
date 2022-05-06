@@ -16,7 +16,7 @@ public class SheetTest : ScriptableObject
     // Note: initialize in OnEnable() not here.
     public SheetTestData[] dataArray;
 
-    public readonly int typeRowIndex = 3;    
+    public readonly int typeRowIndex = 2;    
 
     void OnEnable()
     {

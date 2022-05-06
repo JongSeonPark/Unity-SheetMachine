@@ -3,6 +3,7 @@ using System.Reflection;
 using System.ComponentModel;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace ChickenGames.SheetMachine.GoogleSheet
 {
@@ -25,9 +26,23 @@ namespace ChickenGames.SheetMachine.GoogleSheet
                 {
                     var headerInfo = headerRowInfo[i];
                     var cell = row.Count > headerInfo.index ? (string)row[headerInfo.index] : "";
-                    object value = ParseCellData<T>(headerInfo, cell);
-                    
+                    object value = new object();
+                    try
+                    {
+                        value = ParseCellData<T>(headerInfo, cell);
+                    }
+                    catch
+                    {
+                        string cellIdx = $"{(char)(headerInfo.index + 'A')}{j + 1}";
+                        string cellVal = cell;
+
+                        string msg = $"{cellIdx}, cellValue: {cellVal}";
+                        msg += $"\nFieldName: {headerInfo.field.Name}, Field Type: {headerInfo.field.FieldType}";
+                        Debug.Log(msg);
+                    }
                     headerInfo.field.SetValue(inst, value);
+
+
                 }
                 r.Add(inst);
             }

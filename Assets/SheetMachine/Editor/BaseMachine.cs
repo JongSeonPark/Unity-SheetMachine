@@ -10,13 +10,15 @@ namespace ChickenGames.SheetMachine
         // Undefined is not extract.
         Undefined,
         String,
-        Short,
         Int,
-        Long,
         Float,
-        Double,
-        Enum,
-        Bool,
+
+        // 지원 예정
+        //Short,
+        //Long,
+        //Double,
+        //Enum,
+        //Bool,
     }
 
     [Serializable]
@@ -60,24 +62,15 @@ namespace ChickenGames.SheetMachine
         {
             switch (cellType)
             {
-                case CellType.String:
-                    return "string";
-                case CellType.Short:
-                    return "short";
-                case CellType.Int:
-                    return "int";
-                case CellType.Long:
-                    return "long";
-                case CellType.Float:
-                    return "float";
-                case CellType.Double:
-                    return "double";
-                case CellType.Enum:
-                    return "enum";
-                case CellType.Bool:
-                    return "bool";
-                default:
-                    return "string";
+                case CellType.String: return "string";
+                case CellType.Int: return "int";
+                case CellType.Float:return "float";
+                //case CellType.Short:return "short";
+                //case CellType.Long: return "long";
+                //case CellType.Double: return "double";
+                //case CellType.Enum: return "enum";
+                //case CellType.Bool: return "bool";
+                default: return "string";
             }
         }
     }
@@ -112,9 +105,9 @@ namespace ChickenGames.SheetMachine
                 string result = "\n";
                 columnHeaderList.ForEach(header =>
                 {
+                    if (header.type == CellType.Undefined) return;
                     string type = header.type.ToString().ToLower();
 
-                    // Property 제외
                     string name = header.name;
                     string arr = header.isArray ? "[]" : "";
                     result +=

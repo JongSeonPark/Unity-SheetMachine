@@ -5,7 +5,7 @@ using ChickenGames.SheetMachine.ExcelSheet;
 using ChickenGames.SheetMachine.Utils;
 
 [CustomEditor(typeof(SheetTest2))]
-public class SheetTest2Editor : BaseExcelClassEditor
+public class SheetTest2Editor : BaseSheetClassEditor
 {	    
     public override bool OnDataLoad()
     {

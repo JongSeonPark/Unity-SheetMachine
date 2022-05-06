@@ -5,13 +5,13 @@ using ChickenGames.SheetMachine.ExcelSheet;
 using ChickenGames.SheetMachine.Utils;
 
 [CustomEditor(typeof($ClassName))]
-public class $ClassNameEditor : BaseExcelClassEditor
+public class $ClassNameEditor : BaseSheetClassEditor
 {	    
     public override bool OnDataLoad()
     {
         $ClassName targetData = target as $ClassName;
 
-        string path = PathMethods.Combine(Application.dataPath, PathMethods.GetDefaultProgramPath(), targetData.SpreadSheetName);
+        string path = PathMethods.Combine(Application.dataPath, targetData.SpreadSheetName);
         if (!File.Exists(path))
             return false;
 

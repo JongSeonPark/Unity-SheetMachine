@@ -4,7 +4,7 @@ using ChickenGames.SheetMachine;
 using ChickenGames.SheetMachine.GoogleSheet;
 
 [CustomEditor(typeof(SheetTest))]
-public class SheetTestEditor : BaseGoogleClassEditor
+public class SheetTestEditor : BaseSheetClassEditor
 {	    
     public override bool OnDataLoad()
     {        

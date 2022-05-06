@@ -13,24 +13,69 @@ MonoBehaviour:
   m_Name: SheetTest
   m_EditorClassIdentifier: 
   dataArray:
-  - AA:
-    - 1
-    - 2
-    C: 1
-    ESDA: 2
-    ASDdd: 3
-    asd:
+  - strValue: 
+    strValueArr: []
+    intValue: 0
+    intValuieArr: 
+    floatValue: 0
+    floatValueArr: []
+  - strValue: stringValue
+    strValueArr:
+    - str1
+    - ' str2'
+    intValue: 1
+    intValuieArr: 0100000002000000
+    floatValue: 4.1
+    floatValueArr:
+    - 4.1
+    - 4.2
+  - strValue: 1
+    strValueArr:
+    - str1
+    - ' str2'
+    - ' '
+    intValue: 0
+    intValuieArr: 010000000200000000000000
+    floatValue: 4
+    floatValueArr:
+    - 4.1
+  - strValue: 1.23
+    strValueArr:
+    - str1
+    intValue: 0
+    intValuieArr: 01000000
+    floatValue: 0
+    floatValueArr:
     - 4
-  - AA:
-    - zz
-    C: aa
-    ESDA: w
-    ASDdd: 3
-    asd:
-    - 3
-    - 2
-  - AA: []
-    C: 
-    ESDA: d
-    ASDdd: 0
-    asd: []
+  - strValue: ' '
+    strValueArr:
+    - 1
+    intValue: 0
+    intValuieArr: 
+    floatValue: 0
+    floatValueArr: []
+  - strValue: I am a boy.
+    strValueArr:
+    - 1.23
+    intValue: 0
+    intValuieArr: 
+    floatValue: 0
+    floatValueArr:
+    - 4.1
+    - 4.2
+    - 0
+  - strValue: 
+    strValueArr:
+    - ' '
+    intValue: 0
+    intValuieArr: 
+    floatValue: 0
+    floatValueArr: []
+  - strValue: 
+    strValueArr:
+    - I am a boy.
+    - You are a girl.
+    intValue: 0
+    intValuieArr: 
+    floatValue: 0
+    floatValueArr: []

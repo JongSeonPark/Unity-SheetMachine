@@ -65,7 +65,6 @@ namespace ChickenGames.SheetMachine.ExcelSheet
             {
                 string headerName = headerRow.Cells[i].StringCellValue;
                 string typeStr = typeRangeIndex.HasValue && typeRow.Cells.Count > i ? typeRow.Cells[i].StringCellValue : null;
-                bool isArray = arrayRangeIndex.HasValue && isArrayRow.Cells.Count > i ? isArrayRow.Cells[i].BooleanCellValue : false;
                 ColumnHeader column = new ColumnHeader(headerName, typeStr);
 
                 tmpColumnList.Add(column);
@@ -89,7 +88,7 @@ namespace ChickenGames.SheetMachine.ExcelSheet
                 for (int i = 0; i < headerRowInfo.Count; i++)
                 {
                     var headerInfo = headerRowInfo[i];
-                    var cell = row.GetCell(i, MissingCellPolicy.CREATE_NULL_AS_BLANK);
+                    var cell = row.GetCell(headerInfo.index, MissingCellPolicy.CREATE_NULL_AS_BLANK);
                     object value = new object();
 
                     try
@@ -98,7 +97,7 @@ namespace ChickenGames.SheetMachine.ExcelSheet
                     }
                     catch
                     {
-                        string cellIdx = $"{(char)(i + 'A')}{j + 1}";
+                        string cellIdx = $"{(char)(headerInfo.index + 'A')}{j + 1}";
                         string cellVal = "";
                         switch (cell.CellType)
                         {

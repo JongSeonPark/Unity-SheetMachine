@@ -16,24 +16,43 @@ MonoBehaviour:
   sheetName: SheetTest
   includeTypeRow: 1
   typeRowIndex: 1
-  includeIsArrayRow: 1
-  arrayRowIndex: 2
   columnHeaderList:
-  - name: AA
+  - name: strValue
+    isArray: 0
+    type: 1
+  - name: desc
+    isArray: 0
+    type: 0
+  - name: strValueArr
     isArray: 1
     type: 1
-  - name: C
+  - name: desc
     isArray: 0
-    type: 1
-  - name: ESDA
-    isArray: 0
-    type: 1
-  - name: ASDdd
+    type: 0
+  - name: intValue
     isArray: 0
     type: 3
-  - name: asd
+  - name: desc
+    isArray: 0
+    type: 0
+  - name: intValuieArr
+    isArray: 1
+    type: 3
+  - name: desc
+    isArray: 0
+    type: 0
+  - name: floatValue
+    isArray: 0
+    type: 5
+  - name: desc
+    isArray: 0
+    type: 0
+  - name: floatValueArr
     isArray: 1
     type: 5
+  - name: desc
+    isArray: 0
+    type: 0
   templatePath: SheetMachine/Templates/ExcelTemplates
   dataClassTemplatePath: 
   scriptableObjectClassPath: 

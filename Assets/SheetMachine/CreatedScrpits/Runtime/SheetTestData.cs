@@ -5,15 +5,17 @@ using System.Collections;
 public class SheetTestData
 {
 	
-    public string[] AA;
+    public string strValue;
 
-    public string C;
+    public string[] strValueArr;
 
-    public string ESDA;
+    public int intValue;
 
-    public int ASDdd;
+    public int[] intValuieArr;
 
-    public float[] asd;
+    public float floatValue;
+
+    public float[] floatValueArr;
 
 
 }

@@ -58,7 +58,7 @@ namespace ChickenGames.SheetMachine
                 labelWidth: labelWidth,
                 filePanelTitle: "Open folder"
                 );
-            GUIHelper.DrawTextField(ref machine.className, "DataClass name: ", labelWidth);
+            GUIHelper.DrawTextField(ref machine.className, "DataClass Name: ", labelWidth);
 
 
             EditorGUILayout.Separator();
