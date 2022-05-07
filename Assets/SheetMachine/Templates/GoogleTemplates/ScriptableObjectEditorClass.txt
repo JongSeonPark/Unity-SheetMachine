@@ -1,6 +1,4 @@
-using UnityEngine;
 using UnityEditor;
-using ChickenGames.SheetMachine;
 using ChickenGames.SheetMachine.GoogleSheet;
 
 [CustomEditor(typeof($ClassName))]

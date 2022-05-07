@@ -1,6 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace ChickenGames.SheetMachine
@@ -12,13 +12,11 @@ namespace ChickenGames.SheetMachine
         String,
         Int,
         Float,
-
-        // 지원 예정
-        //Short,
-        //Long,
-        //Double,
-        //Enum,
-        //Bool,
+        Short,
+        Long,
+        Double,
+        Enum,
+        Bool,
     }
 
     [Serializable]
@@ -48,29 +46,6 @@ namespace ChickenGames.SheetMachine
                 isArray = typeStr.Contains("[]");
                 var temp = isArray ? typeStr.Split(new string[] { "[]" }, StringSplitOptions.RemoveEmptyEntries)[0] : typeStr;
                 Enum.TryParse(temp, true, out type);
-            }
-        }
-    }
-
-    public class MemberFieldData
-    {
-        public CellType type = CellType.Undefined;
-        public string Type => TypeEnumToString(type);
-        public string name;
-
-        public static string TypeEnumToString(CellType cellType)
-        {
-            switch (cellType)
-            {
-                case CellType.String: return "string";
-                case CellType.Int: return "int";
-                case CellType.Float:return "float";
-                //case CellType.Short:return "short";
-                //case CellType.Long: return "long";
-                //case CellType.Double: return "double";
-                //case CellType.Enum: return "enum";
-                //case CellType.Bool: return "bool";
-                default: return "string";
             }
         }
     }
@@ -106,8 +81,15 @@ namespace ChickenGames.SheetMachine
                 columnHeaderList.ForEach(header =>
                 {
                     if (header.type == CellType.Undefined) return;
-                    string type = header.type.ToString().ToLower();
 
+                    string type;
+
+                    if (header.type == CellType.Enum)
+                    {
+                        type = header.name.First().ToString().ToUpper() + String.Join("", header.name.Skip(1));
+                    }
+                    else
+                        type = header.type.ToString().ToLower();
                     string name = header.name;
                     string arr = header.isArray ? "[]" : "";
                     result +=

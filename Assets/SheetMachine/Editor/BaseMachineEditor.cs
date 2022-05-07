@@ -1,7 +1,5 @@
 using ChickenGames.SheetMachine.GoogleSheet;
 using ChickenGames.SheetMachine.Utils;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 

@@ -1,6 +1,5 @@
 using System;
 using System.Reflection;
-using System.ComponentModel;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,65 +10,50 @@ namespace ChickenGames.SheetMachine
         protected object ParseCellData<T>(HeaderRowInfo headerRowInfo, string cellData)
         {
             var type = headerRowInfo.field.FieldType;
-            object value = new object();
+            object value = null;
 
             if (type != typeof(string) && type != typeof(string[]))
                 cellData = cellData.Replace(" ", string.Empty);
 
             if (type.IsArray)
             {
+                if (string.IsNullOrWhiteSpace(cellData))
+                    return value;
+
                 const char DELIMETER = ','; // '\n'
+                var values = cellData.Split(DELIMETER).Where(v => !string.IsNullOrWhiteSpace(v)).ToArray();
+                Array array = (Array)Activator.CreateInstance(type, values.Length);
 
-                if (type.GetElementType().IsEnum)
+                for (int k = 0; k < values.Length; k++)
                 {
-                    var values = cellData.Split(DELIMETER)
-                        .Select(i => Enum.Parse(type.GetElementType(), i))
-                        .ToArray();
-
-                    Array array = (Array)Activator.CreateInstance(type, values.Length);
-
-                    for (int k = 0; k < values.Length; k++)
-                    {
-                        array.SetValue(values[k], k);
-                    }
-
-                    value = array;
-                }
-                else
-                {
-                    if (string.IsNullOrEmpty(cellData)) 
-                        value = null;
+                    var v = values[k];
+                    object data;
+                    if (type.GetElementType().IsEnum)
+                        data = Enum.Parse(type.GetElementType(), v);
                     else
-                    {
-                        var values = cellData.Split(DELIMETER);
-
-                        Array array = (Array)Activator.CreateInstance(type, values.Length);
-
-                        for (int k = 0; k < values.Length; k++)
-                        {
-                            var v = values[k];
-                            if (v == "" && type != typeof(string))
-                                v = "0";
-                            var temp = Convert.ChangeType(v, type.GetElementType());
-                            array.SetValue(temp, k);
-                        }
-
-                        value = array;
-                    }
+                        data = Convert.ChangeType(v, type.GetElementType());
+                    array.SetValue(data, k);
                 }
+                value = array;
             }
             else
             {
                 if (type.IsEnum)
                 {
-                    value = Enum.Parse(type, cellData);
+                    if (!string.IsNullOrEmpty(cellData))
+                    {
+                        value = Enum.Parse(type, cellData);
+                    }
                 }
                 else
                 {
                     if (type == typeof(int))
                         cellData = cellData.Split('.')[0];
 
-                    if (cellData == "" && type != typeof(string))
+                    if (type == typeof(bool))
+                        cellData = "false";
+
+                    if (string.IsNullOrEmpty(cellData) && type != typeof(string))
                         cellData = "0";
                     
                     value = Convert.ChangeType(cellData, type);

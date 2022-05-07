@@ -1,6 +1,4 @@
 using System.Linq;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 using Google.Apis.Auth.OAuth2;
@@ -10,8 +8,6 @@ using Google.Apis.Services;
 using Google.Apis.Util.Store;
 using System.IO;
 using System.Threading;
-using Newtonsoft.Json;
-using UnityEditor;
 using ChickenGames.SheetMachine.Utils;
 
 namespace ChickenGames.SheetMachine.GoogleSheet

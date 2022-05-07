@@ -13,12 +13,13 @@ namespace ChickenGames.SheetMachine.Utils
     /// </summary>
     public static class PathMethods
     {
+        // 파일을 옮길 시 ProgramPath를 변경해주세요.
         static readonly string ProgramPath = "SheetMachine";
         static readonly string TemplatePath = Combine(ProgramPath, "Templates");
         static readonly string CredientalPath = Combine(ProgramPath, "GoogleCredientals");
         static readonly string TokenPath = Combine(ProgramPath, "GoogleTokens");
-        static readonly string RuntimeClassPath = Combine(ProgramPath, "CreatedScrpits", "Runtime");
-        static readonly string EditorClassPath = Combine(ProgramPath, "CreatedScrpits", "Editor");
+        static readonly string RuntimeClassPath = Combine(ProgramPath, "CreatedScripts", "Runtime");
+        static readonly string EditorClassPath = Combine(ProgramPath, "CreatedScripts", "Editor");
 
         public static string GetDefaultProgramPath() => ProgramPath;
         public static string GetDefaultTemplatePath() => TemplatePath;
