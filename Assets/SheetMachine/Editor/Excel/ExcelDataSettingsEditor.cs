@@ -12,7 +12,7 @@ namespace ChickenGames.SheetMachine.ExcelSheet
         {
             GUIHelper.DrawOpenFolderPathLayout(
                 pathText: ref ExcelDataSettings.Instance.templatePath,
-                defaultPath: PathMethods.GetDefaultTemplatePath(),
+                defaultPath: PathMethods.GetDefaultExcelTemplatePath(),
                 title: "Template Path: ",
                 labelWidth: labelWidth,
                 filePanelTitle: "Open folder"

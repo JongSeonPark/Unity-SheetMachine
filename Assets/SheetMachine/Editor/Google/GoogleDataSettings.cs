@@ -54,7 +54,7 @@ namespace ChickenGames.SheetMachine.GoogleSheet
         public string tokenPath = PathMethods.GetDefaultTokenPath();
 
         // A default path where .txt template files are.
-        public string templatePath = PathMethods.GetDefaultTemplatePath();
+        public string templatePath = PathMethods.GetDefaultGoogleTemplatePath();
 
         // A path where generated ScriptableObject derived class and its data class script files are to be put.
         public string runtimeClassPath = PathMethods.GetDefaultRuntimeClassPath();

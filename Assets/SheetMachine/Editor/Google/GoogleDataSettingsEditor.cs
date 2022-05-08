@@ -38,7 +38,7 @@ namespace ChickenGames.SheetMachine.GoogleSheet
 
             GUIHelper.DrawOpenFolderPathLayout(
                 pathText: ref GoogleDataSettings.Instance.templatePath,
-                defaultPath: PathMethods.GetDefaultTemplatePath(),
+                defaultPath: PathMethods.GetDefaultGoogleTemplatePath(),
                 title: "Template Path: ",
                 labelWidth: labelWidth,
                 filePanelTitle: "Open folder"

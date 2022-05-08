@@ -8,7 +8,7 @@ namespace ChickenGames.SheetMachine.ExcelSheet
     public class ExcelDataSettings : SingletonScriptableObject<ExcelDataSettings>
     {
         // A default path where .txt template files are.
-        public string templatePath = PathMethods.GetDefaultTemplatePath();
+        public string templatePath = PathMethods.GetDefaultExcelTemplatePath();
 
         // A path where generated ScriptableObject derived class and its data class script files are to be put.
         public string runtimeClassPath = PathMethods.GetDefaultRuntimeClassPath();

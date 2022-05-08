@@ -23,6 +23,8 @@ namespace ChickenGames.SheetMachine.Utils
 
         public static string GetDefaultProgramPath() => ProgramPath;
         public static string GetDefaultTemplatePath() => TemplatePath;
+        public static string GetDefaultExcelTemplatePath() => Combine(GetDefaultTemplatePath(), "ExcelTemplates");
+        public static string GetDefaultGoogleTemplatePath() => Combine(GetDefaultTemplatePath(), "GoogleTemplates");
         public static string GetDefaultCredientalPath() => CredientalPath;
         public static string GetDefaultTokenPath() => TokenPath;
         public static string GetDefaultRuntimeClassPath() => RuntimeClassPath;
