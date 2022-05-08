@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -40,12 +40,9 @@ namespace ChickenGames.SheetMachine.GoogleSheet
                     }
                     if (value != null)
                         headerInfo.field.SetValue(inst, value);
-
-
                 }
                 r.Add(inst);
             }
-
             Debug.Log("Deserialize is sucess.");
             return r.ToArray();
         }

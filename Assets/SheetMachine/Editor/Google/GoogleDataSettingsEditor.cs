@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEditor;
 using ChickenGames.SheetMachine.Utils;
 
@@ -11,7 +11,7 @@ namespace ChickenGames.SheetMachine.GoogleSheet
 
         public override void OnInspectorGUI()
         {
-            EditorGUILayout.HelpBox("Credentials¸¦ ´Ù¿î¹ŞÀ¸¼Å¼­ json ÆÄÀÏÀÇ °æ·Î¸¦ ³Ö¾îÁÖ¼¼¿ä.", MessageType.Info, true);
+            EditorGUILayout.HelpBox("Credentialsë¥¼ ë‹¤ìš´ë°›ìœ¼ì…”ì„œ json íŒŒì¼ì˜ ê²½ë¡œë¥¼ ë„£ì–´ì£¼ì„¸ìš”.", MessageType.Info, true);
 
             GUIHelper.DrawOpenFilePathLayout(
                 pathText: ref GoogleDataSettings.Instance.credentialsPath,
@@ -22,7 +22,7 @@ namespace ChickenGames.SheetMachine.GoogleSheet
                 filePanelTitle: "Open JSON file"
                 );
             
-            EditorGUILayout.HelpBox("Google Cloud Platform¿¡¼­ÀÇ ÇÁ·ÎÁ§Æ®(¾îÇÃ¸®ÄÉÀÌ¼Ç)ÀÌ¸§À» ÀÔ·ÂÇÏ¼¼¿ä.", MessageType.Info, true);
+            EditorGUILayout.HelpBox("Google Cloud Platformì—ì„œì˜ í”„ë¡œì íŠ¸(ì–´í”Œë¦¬ì¼€ì´ì…˜)ì´ë¦„ì„ ì…ë ¥í•˜ì„¸ìš”.", MessageType.Info, true);
             GUIHelper.DrawTextField(ref GoogleDataSettings.Instance.applicationName, "App Name: ", labelWidth);
 
             GUIHelper.DrawOpenFolderPathLayout(

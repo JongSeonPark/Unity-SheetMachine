@@ -1,4 +1,4 @@
-using ChickenGames.SheetMachine.GoogleSheet;
+﻿using ChickenGames.SheetMachine.GoogleSheet;
 using ChickenGames.SheetMachine.Utils;
 using UnityEditor;
 using UnityEngine;
@@ -9,7 +9,6 @@ namespace ChickenGames.SheetMachine
     public abstract class BaseMachineEditor : Editor
     {
         protected const int labelWidth = 100;
-
         protected BaseMachine machine;
 
         protected void OnAfterDraw()
@@ -115,9 +114,5 @@ namespace ChickenGames.SheetMachine
                 }
             }
         }
-
-
-        //protected abstract void Import();
-        //protected abstract void Generate();
     }
 }

@@ -1,4 +1,4 @@
-using System.Linq;
+ï»¿using System.Linq;
 using UnityEngine;
 
 using Google.Apis.Auth.OAuth2;
@@ -45,30 +45,21 @@ namespace ChickenGames.SheetMachine.GoogleSheet
             return scopes.Select(ScopeEnumToString).ToArray();
         }
 
-        /// <summary>
-        /// Google Cloud Platform¿¡¼­ÀÇ ÇÁ·ÎÁ§Æ®(¾îÇÃ¸®ÄÉÀÌ¼Ç)ÀÌ¸§À» ÀÔ·ÂÇÏ¼¼¿ä.
-        /// </summary>
+        // Google Cloud Platformì—ì„œì˜ í”„ë¡œì íŠ¸(ì–´í”Œë¦¬ì¼€ì´ì…˜)ì´ë¦„ì„ ì…ë ¥í•˜ì„¸ìš”.
         public string applicationName = "AppName";
-        /// <summary>
-        /// Credentials¸¦ ´Ù¿î¹ŞÀ¸¼Å¼­ json ÆÄÀÏÀÇ °æ·Î¸¦ ³Ö¾îÁÖ¼¼¿ä.
-        /// </summary>
+
+        // Credentialsë¥¼ ë‹¤ìš´ë°›ìœ¼ì…”ì„œ json íŒŒì¼ì˜ ê²½ë¡œë¥¼ ë„£ì–´ì£¼ì„¸ìš”.
         public string credentialsPath = PathMethods.GetDefaultCredientalPath();
 
         public string tokenPath = PathMethods.GetDefaultTokenPath();
 
-        /// <summary>
-        /// A default path where .txt template files are.
-        /// </summary>
+        // A default path where .txt template files are.
         public string templatePath = PathMethods.GetDefaultTemplatePath();
 
-        /// <summary>
-        /// A path where generated ScriptableObject derived class and its data class script files are to be put.
-        /// </summary>
+        // A path where generated ScriptableObject derived class and its data class script files are to be put.
         public string runtimeClassPath = PathMethods.GetDefaultRuntimeClassPath();
 
-        /// <summary>
-        /// A path where generated editor script files are to be put.
-        /// </summary>
+        // A path where generated editor script files are to be put.
         public string editorClassPath = PathMethods.GetDefaultEditorClassPath();
 
         SheetsService sheetsService;

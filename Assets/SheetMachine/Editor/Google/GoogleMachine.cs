@@ -1,4 +1,4 @@
-using ChickenGames.SheetMachine.Utils;
+﻿using ChickenGames.SheetMachine.Utils;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -77,18 +77,6 @@ namespace ChickenGames.SheetMachine.GoogleSheet
         {
             Debug.Log("Generate");
 
-            //var sp = new ScriptPrescription
-            //{
-            //    ClassName = className,
-            //    DataClassName = className + "Data",
-            //    SpreadsheetName = spreadSheetName,
-            //};
-
-            //ScriptsGenerator.Generate(
-            //    PathMethods.Combine(Application.dataPath, templatePath, "ScriptableObjectClass.txt"),
-            //    PathMethods.Combine(Application.dataPath, runtimeClassPath, "ClassName.cs"),
-            //    sp);
-
             Dictionary<string, string> scriptPrescription = new Dictionary<string, string>()
             {
                 { "ClassName", className },
@@ -113,16 +101,6 @@ namespace ChickenGames.SheetMachine.GoogleSheet
                 txtFilePath: PathMethods.Combine(Application.dataPath, templatePath, "ScriptableObjectEditorClass.txt"),
                 createPath: PathMethods.Combine(Application.dataPath, editorClassPath, $"{scriptPrescription["DataClassName"]}Editor.cs"),
                 sp: scriptPrescription);
-
-            //ScriptsGenerator.Generate(
-            //    PathMethods.Combine(Application.dataPath, templatePath, "ScriptableObjectClass.txt"),
-            //    PathMethods.Combine(Application.dataPath, runtimeClassPath, $"{scriptPrescription["DataClassName"]}.cs"),
-            //    scriptPrescription);
-
-            //ScriptsGenerator.Generate(
-            //    PathMethods.Combine(Application.dataPath, templatePath, "ScriptableObjectClass.txt"),
-            //    PathMethods.Combine(Application.dataPath, runtimeClassPath, $"{scriptPrescription["DataClassName"]}.cs"),
-            //    scriptPrescription);
         }
     }
 }

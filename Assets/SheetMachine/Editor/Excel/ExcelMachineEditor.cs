@@ -1,4 +1,4 @@
-using ChickenGames.SheetMachine.Utils;
+﻿using ChickenGames.SheetMachine.Utils;
 using UnityEditor;
 using UnityEngine;
 
@@ -7,7 +7,6 @@ namespace ChickenGames.SheetMachine.ExcelSheet
     [CustomEditor(typeof(ExcelMachine))]
     public class ExcelMachineEditor : BaseMachineEditor
     {
-
         private void OnEnable()
         {
             machine = target as ExcelMachine;

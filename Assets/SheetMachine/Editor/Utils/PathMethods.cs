@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -8,12 +8,12 @@ using UnityEngine;
 namespace ChickenGames.SheetMachine.Utils
 {
     /// <summary>
-    /// Default Path Value ¼³Á¤ÇÏ´Â °÷ÀÔ´Ï´Ù.
-    /// ÇÁ·Î±×·¥ ÀÌµ¿½Ã ProgramPath¸¦ º¯°æÇØÁÖ¼¼¿ä.
+    /// Default Path Value ì„¤ì •í•˜ëŠ” ê³³ì…ë‹ˆë‹¤.
+    /// í”„ë¡œê·¸ë¨ ì´ë™ì‹œ ProgramPathë¥¼ ë³€ê²½í•´ì£¼ì„¸ìš”.
     /// </summary>
     public static class PathMethods
     {
-        // ÆÄÀÏÀ» ¿Å±æ ½Ã ProgramPath¸¦ º¯°æÇØÁÖ¼¼¿ä.
+        // íŒŒì¼ì„ ì˜®ê¸¸ ì‹œ ProgramPathë¥¼ ë³€ê²½í•´ì£¼ì„¸ìš”.
         static readonly string ProgramPath = "SheetMachine";
         static readonly string TemplatePath = Combine(ProgramPath, "Templates");
         static readonly string CredientalPath = Combine(ProgramPath, "GoogleCredientals");
@@ -28,13 +28,6 @@ namespace ChickenGames.SheetMachine.Utils
         public static string GetDefaultRuntimeClassPath() => RuntimeClassPath;
         public static string GetDefaultEditorClassPath() => EditorClassPath;
 
-        /// <summary>
-        /// \ÇüÅÂÀÇ Path.CombineÀ» À¯´ÏÆ¼°¡ Ä£¼÷ÇÑ /ÇüÅÂ·Î Combine
-        /// </summary>
-        /// <param name="path1"></param>
-        /// <param name="path2"></param>
-        /// <returns></returns>
-        /// <exception cref="ArgumentNullException"></exception>
         public static string Combine(string path1, string path2)
         {
             if (path1 == null || path2 == null)

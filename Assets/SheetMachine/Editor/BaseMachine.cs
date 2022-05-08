@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -68,7 +68,7 @@ namespace ChickenGames.SheetMachine
         public string editorClassPath;
         public string className;
 
-        // Æ÷ÇÔµÈ Æ¯¼öÇÑ Row Áß¿¡¼­ °¡Àå Å« °ªÀ» DataStartÀÇ ½ÃÀÛ °ªÀ¸·Î Ç¥Çö
+        // í¬í•¨ëœ íŠ¹ìˆ˜í•œ Row ì¤‘ì—ì„œ ê°€ìž¥ í° ê°’ì„ DataStartì˜ ì‹œìž‘ ê°’ìœ¼ë¡œ í‘œí˜„
         protected int DataStartRowIndex => Mathf.Max(
                 1,
                 includeTypeRow ? typeRowIndex + 1 : 0);

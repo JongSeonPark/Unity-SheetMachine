@@ -1,4 +1,4 @@
-using ChickenGames.SheetMachine.Utils;
+ï»¿using ChickenGames.SheetMachine.Utils;
 using UnityEditor;
 using UnityEngine;
 
@@ -7,7 +7,6 @@ namespace ChickenGames.SheetMachine.GoogleSheet
     [CustomEditor(typeof(GoogleMachine))]
     public class GoogleMachineEditor : BaseMachineEditor
     {
-
         private void OnEnable()
         {
             machine = target as GoogleMachine;
@@ -17,9 +16,9 @@ namespace ChickenGames.SheetMachine.GoogleSheet
         {
             GUILayout.Label("Script Path Settings:", new GUIStyle(GUI.skin.label));
             EditorGUILayout.HelpBox(
-                "SheetÀÇ Id ºÎºĞÀÔ´Ï´Ù.\n" +
-                "ex) https://docs.google.com/spreadsheets/d/(ÀÌºÎºĞ)/edit#gid=0\n" +
-                "(ÀÌºÎºĞ)À» º¹»çÇØ¼­ ³Ö¾îÁÖ½Ã¸é µË´Ï´Ù.",
+                "Sheetì˜ Id ë¶€ë¶„ì…ë‹ˆë‹¤.\n" +
+                "ex) https://docs.google.com/spreadsheets/d/(ì´ë¶€ë¶„)/edit#gid=0\n" +
+                "(ì´ë¶€ë¶„)ì„ ë³µì‚¬í•´ì„œ ë„£ì–´ì£¼ì‹œë©´ ë©ë‹ˆë‹¤.",
                 MessageType.Info, true);
             
             GUIHelper.DrawTextField(ref machine.spreadSheetName, "SpreadSheet Id: ", labelWidth);

@@ -1,4 +1,4 @@
-using ChickenGames.SheetMachine.Utils;
+﻿using ChickenGames.SheetMachine.Utils;
 using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
@@ -8,8 +8,6 @@ namespace ChickenGames.SheetMachine.ExcelSheet
 {
     public class ExcelMachine : BaseMachine
     {
-
-
         [MenuItem("Assets/Create/SheetMachine/ExcelMachine")]
         public static void Create()
         {
@@ -26,7 +24,6 @@ namespace ChickenGames.SheetMachine.ExcelSheet
             EditorUtility.FocusProjectWindow();
             Selection.activeObject = asset;
         }
-
 
         public override void Import()
         {
@@ -57,7 +54,6 @@ namespace ChickenGames.SheetMachine.ExcelSheet
             if (string.IsNullOrEmpty(className)) className = sheetName;
         }
 
-
         public override void Generate()
         {
             Debug.Log("Generate");
@@ -86,7 +82,6 @@ namespace ChickenGames.SheetMachine.ExcelSheet
                 txtFilePath: PathMethods.Combine(Application.dataPath, templatePath, "ScriptableObjectEditorClass.txt"),
                 createPath: PathMethods.Combine(Application.dataPath, editorClassPath, $"{scriptPrescription["DataClassName"]}Editor.cs"),
                 sp: scriptPrescription);
-
         }
     }
 }
